@@ -4,9 +4,12 @@ import React from 'react'
 export const SongContext = createContext(null)
 
 export const SongProvider = (props) => {
-    const [songDetails, setSongDetails] = useState()
+    const [songDetails, setSongDetails] = useState([])
+    const [albumDetails, setAlbumDetails] = useState([])
+
+
     return (
-        <SongContext.Provider value={{ songDetails, setSongDetails }}>
+        <SongContext.Provider value={{ songDetails, setSongDetails, albumDetails, setAlbumDetails }}>
             {props.children}
         </SongContext.Provider>
     )
