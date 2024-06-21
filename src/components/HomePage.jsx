@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import NavBar from './NavBar';
 import SongContext from '../contexts/SongContext';
-import SongCard from './SongCard';
 import Section from './Section'
+
 const HomePage = () => {
     const { songDetails, setSongDetails } = useContext(SongContext);
 
@@ -11,13 +11,11 @@ const HomePage = () => {
             const response = await fetch("https://jiosaavn-api-latest-osvc5k0j6-dipenmagdanis-projects.vercel.app/modules");
             const { data } = await response.json();
 
-
             let { trending, albums, charts, playlists, radio, discover, artist_recos: artists, city_mod: city, mixes, promo1, promo2, promo4, promo5, promo8, promo11, promo12, promo13, promo14 } = data;
             let dataFromApi = {
                 trending, albums, charts, playlists, radio, discover, artists, city, mixes, promo1, promo2, promo4, promo5, promo8, promo11, promo12, promo13, promo14
             };
             setSongDetails(dataFromApi);
-
 
         } catch (error) {
             console.log(error);
@@ -28,7 +26,7 @@ const HomePage = () => {
         fetchSongData();
     }, []);
 
-    console.log(songDetails?.discover)
+    // console.log(songDetails)
     return (
         <>
             <NavBar />
@@ -54,31 +52,13 @@ const HomePage = () => {
                         data={songDetails?.playlists?.data || []}
                         displayText="false"
                     />
-                    <Section
-                        title={songDetails?.artists?.title.slice(0, 18)}
-                        data={songDetails?.artists?.data || []}
-                        displayText="true"
-                    />
-                    <Section
-                        title={songDetails?.radio?.title.slice(0, 18)}
-                        data={songDetails?.radio?.data || []}
-                        displayText="true"
-                    />
-                    <Section
-                        title="Discover"
-                        data={songDetails?.discover?.data || []}
-                        displayText="true"
-                    />
+
                     <Section
                         title={songDetails?.city?.title.slice(0, 20)}
                         data={songDetails?.city?.data || []}
                         displayText="true"
                     />
-                    <Section
-                        title={songDetails?.mixes?.title.slice(0, 20)}
-                        data={songDetails?.mixes?.data || []}
-                        displayText="true"
-                    />
+
                     <Section
                         title={songDetails?.promo1?.title.slice(0, 20)}
                         data={songDetails?.promo1?.data || []}
@@ -99,21 +79,13 @@ const HomePage = () => {
                         data={songDetails?.promo5?.data || []}
                         displayText="true"
                     />
-                    <Section
-                        title={songDetails?.promo8?.title.slice(0, 20)}
-                        data={songDetails?.promo8?.data || []}
-                        displayText="true"
-                    />
+
                     <Section
                         title={songDetails?.promo11?.title.slice(0, 20)}
                         data={songDetails?.promo11?.data || []}
                         displayText="true"
                     />
-                    <Section
-                        title={songDetails?.promo12?.title.slice(0, 20)}
-                        data={songDetails?.promo12?.data || []}
-                        displayText="true"
-                    />
+
                     <Section
                         title={songDetails?.promo13?.title.slice(0, 20)}
                         data={songDetails?.promo13?.data || []}
