@@ -14,7 +14,7 @@ const NavBar = () => {
                         <li>
                             <Link to="/" className="flex items-center p- text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <img src="../music-logo.png" alt="" width={100} />
-                                <span className="ms-1 text-2xl">Vajra Music</span>
+                                <span className="ms-1 text-2xl">Harmoniq</span>
                             </Link>
                         </li>
                         <li>
