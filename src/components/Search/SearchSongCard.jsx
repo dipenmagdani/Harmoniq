@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
 import { Link } from "react-router-dom";
 import { WaveSpinner } from "react-spinners-kit"; // Ensure you have this spinner or replace with your preferred one
-import { useContext } from 'react';
-import SongContext from '../contexts/SongContext';
-const SongCard = ({ items, displayText }) => {
-    const { isLoadingCard, setIsLoadingCard } = useContext(SongContext)
+import { useContext, useEffect } from 'react';
+import SongContext from '../../contexts/SongContext';
+const SearchSongCard = ({ items }) => {
+    const { isLoadingCard, setIsLoadingCard, searchQuery, setSearchQuery } = useContext(SongContext)
+
     useEffect(() => {
         // Simulating loading delay with setTimeout
         setTimeout(() => {
@@ -24,7 +25,6 @@ const SongCard = ({ items, displayText }) => {
         }>
             {isLoadingCard ? (
                 // Loading indicator while fetching data
-
                 <div className="main-card w-52 h-64 bg-black pl-2 rounded-lg overflow-hidden">
                     <div className="flex items-center justify-center w-44 h-40">
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -33,14 +33,15 @@ const SongCard = ({ items, displayText }) => {
                     </div>
                 </div>
             ) : (
-                // Display the content once loaded
-                <div className="main-card w-52 h-64 bg-black pl-2 rounded-lg overflow-hidden hover:bg-neutral-800 cursor-pointer hover:opacity-80 hover:rounded-xl">
+                <div className="main-card w-52 h-56 bg-black pl-2 rounded-lg overflow-hidden hover:bg-neutral-800 cursor-pointer hover:opacity-80">
                     <div className="cover-img flex items-center justify-center transition-all duration-300 hover:scale-110">
-                        <img src={Array.isArray(items.image) ? items.image[2].link : items.image} alt="" className="rounded-md w-44 h-40 object-cover" />
+                        <img src={Array.isArray(items.image) ? items.image[2].url : items.image} alt="" className="rounded-md w-44 h-40 object-cover" />
                     </div>
-                    <div className="p-2 w-56 h-80">
-                        <h1 className="text-white font-extrabold text-md text-pretty">{items.name.slice(0, 1).toUpperCase()}{items.name.slice(1)}</h1>
-                        <h2 className="text-slate-50 opacity-50 text-sm text-wrap">{items.subtitle.length > 30 ? items.subtitle.slice(0, 25) + "..." : items.subtitle.slice(0, 30)}</h2>
+                    <div className="p-2 w-56">
+                        <h1 className="text-white font-extrabold text-md text-pretty">{
+                            items.title.replace(/&quot;/g, "")
+                        }</h1>
+                        <h2 className="text-slate-50 opacity-50 text-sm text-wrap">{items.artist}</h2>
                     </div>
                 </div>
             )}
@@ -49,4 +50,4 @@ const SongCard = ({ items, displayText }) => {
     );
 }
 
-export default SongCard;
+export default SearchSongCard

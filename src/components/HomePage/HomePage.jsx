@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import NavBar from './NavBar';
-import SongContext from '../contexts/SongContext';
+import SongContext from '../../contexts/SongContext';
 import Section from './Section'
-
+import MusicPlayer from '../MusicPlayer/MusicPlayer'
 const HomePage = () => {
     const { songDetails, setSongDetails } = useContext(SongContext);
 
@@ -17,6 +17,7 @@ const HomePage = () => {
             };
             setSongDetails(dataFromApi);
 
+
         } catch (error) {
             console.log(error);
         }
@@ -30,6 +31,8 @@ const HomePage = () => {
     return (
         <>
             <NavBar />
+            <MusicPlayer />
+
             <div className='song_data'>
                 <div className='song_data'>
                     <Section

@@ -1,9 +1,10 @@
 import React from 'react'
 import SongCard from './SongCard'
 import { useContext } from 'react'
-import SongContext from '../contexts/SongContext'
+import SongContext from '../../contexts/SongContext'
 const Section = ({ title, data, displayText, isLoading }) => {
-    const { isLoadingCard } = useContext(SongContext)
+    const { isLoadingCard, searchQuery, setSearchQuery } = useContext(SongContext)
+
     return (
         <>
             <div className="p-4 sm:ml-64">
@@ -16,6 +17,7 @@ const Section = ({ title, data, displayText, isLoading }) => {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }
