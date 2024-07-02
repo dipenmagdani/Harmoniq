@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from './components/HomePage/HomePage';
 import { SongProvider } from './contexts/SongContext';
 import { TopTrending } from './components/NavbarSections/TopTrending';
-import { AlbumDetails } from './components/AlbumAndPlaylist/AlbumDetails';
+import AlbumDetails from './components/AlbumAndPlaylist/AlbumDetails';
 import { PlaylistDetails } from './components/AlbumAndPlaylist/PlaylistDetails'
 import SearchSong from './components/Search/SearchSong'
 export const App = () => {

@@ -9,7 +9,11 @@ export default {
       fontFamily: {
         redHat: ["Red Hat Display", "sans-serif"],
         inter: ["Inter","sans-serif"]
-      }
+      },
+      boxShadow: {
+        'glow': '0 0 15px rgba(255, 105, 180, 0.8)',
+      },
+
     },
   },
   colors:{
@@ -23,5 +27,7 @@ export default {
       "bgHover": "#4C4E54",
       "actionBorder": "#EBEBFFd"
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')({ preferredStrategy: 'pseudoelements' }),
+  ],
 }

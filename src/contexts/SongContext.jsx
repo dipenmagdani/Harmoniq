@@ -1,4 +1,4 @@
-import { createContext, useState, useTransition } from "react";
+import { createContext, useState, useRef } from "react";
 import React from 'react'
 
 export const SongContext = createContext(null)
@@ -9,10 +9,15 @@ export const SongProvider = (props) => {
     const [playlistDetails, setPlaylistDetails] = useState([])
     const [isLoadingCard, setIsLoadingCard] = useState(true);
     const [searchQuery, setSearchQuery] = useState("")
+    const [currentPlaying, setCurrentPlaying] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(false)
+    const [currentSong, setCurrentSong] = useState(null);
+    const audioRef = useRef(new Audio());
+
 
 
     return (
-        <SongContext.Provider value={{ songDetails, setSongDetails, albumDetails, setAlbumDetails, playlistDetails, setPlaylistDetails, isLoadingCard, setIsLoadingCard, searchQuery, setSearchQuery }}>
+        <SongContext.Provider value={{ songDetails, setSongDetails, albumDetails, setAlbumDetails, playlistDetails, setPlaylistDetails, isLoadingCard, setIsLoadingCard, searchQuery, setSearchQuery, currentPlaying, setCurrentPlaying, isPlaying, setIsPlaying, currentSong, setCurrentSong, audioRef }}>
             {props.children}
         </SongContext.Provider>
     )

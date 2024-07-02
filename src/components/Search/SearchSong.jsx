@@ -4,6 +4,7 @@ import NavBar from '../HomePage/NavBar';
 import SectionSearch from './SectionSearch';
 import { useContext } from 'react';
 import SongContext from '../../contexts/SongContext';
+import MusicPlayer from '../MusicPlayer/MusicPlayer';
 const SearchSong = () => {
     const { name } = useParams();
     const { isLoadingCard, setIsLoadingCard } = useContext(SongContext)
@@ -36,6 +37,11 @@ const SearchSong = () => {
             <div className='song_data'>
                 <div className='song_data'>
                     <SectionSearch
+                        title={"Top"}
+                        data={searchData?.topQuery?.results || []}
+                        displayText="false"
+                    />
+                    <SectionSearch
                         title={"Album"}
                         data={searchData?.albums?.results || []}
                         displayText="false"
@@ -50,9 +56,9 @@ const SearchSong = () => {
                         data={searchData?.songs?.results || []}
                         displayText="false"
                     />
-
                 </div>
             </div>
+            <MusicPlayer />
         </>
     )
 }
