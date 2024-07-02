@@ -2,6 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .glow {
+      @apply shadow-glow;
+    }
+  }
 body{
     background-color: rgb(0, 0, 0);
     font-family: 'Red Hat Display';
@@ -12,8 +17,7 @@ body{
     display: none;
   }
   .main-div {
-    background-color: #181818;
-    padding: 16px;
+    padding: 10px;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }

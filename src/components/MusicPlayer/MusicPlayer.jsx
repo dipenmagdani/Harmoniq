@@ -1,34 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PiPlayFill, PiPauseFill, PiSkipBackFill, PiSkipForwardFill } from 'react-icons/pi';
+import SongContext from '../../contexts/SongContext';
 
 const MusicPlayer = () => {
+    const { isPlaying, currentPlaying, handlePlayback } = useContext(SongContext);
     return (
-        <div className="main-div fixed bottom-0 left-0 right-0 flex justify-between items-center bg-black p-4">
+        <div className={`main-div fixed bottom-2 left-6 right-6 flex items-center justify-between p-4 from-slate-900 to-red-950 rounded-lg transition-all duration-500 backdrop-blur-lg`}>
+
+            {/* Album Cover and Song Info */}
             <div className="flex items-center">
-                <img src="https://via.placeholder.com/50" alt="Album cover" className="w-12 h-12 rounded-md mr-4" />
+                <img src={isPlaying?.image ? isPlaying.image[2].link : "https://via.placeholder.com/50"} alt="Album cover" className="w-12 h-12 rounded-md mr-4" />
                 <div>
-                    <h4 className="text-white text-sm">Song Title</h4>
-                    <p className="text-gray-400 text-xs">Artist Name</p>
+                    <h4 className="text-white text-sm whitespace-nowrap">{isPlaying?.name}</h4>
+                    <div className="overflow-x-scroll max-w-xs scrollbar-thin scrollbar-track-white scrollbar-thumb-black scrollbar-thumb-rounded-full">
+                        <p className="text-gray-400 text-xs whitespace-nowrap">{isPlaying?.artist_map?.artists?.map(a_name => a_name.name).join(", ").slice(0, 100)}</p>
+                    </div>
                 </div>
             </div>
-            <div className="audio-controls flex items-center relative left-14">
-                <button className="mx-2 text-white">
+
+            {/* Playback Controls */}
+            <div className="flex items-center justify-center flex-grow fixed right-0 left-0">
+                <button className="mx-2 text-white hover:text-gray-400 transition-colors">
                     <PiSkipBackFill size={24} />
                 </button>
-                <button className="mx-2 text-white">
-                    <PiPlayFill size={24} />
+                <button className="playPause mx-4 text-white hover:text-gray-400 transition-colors" onClick={() => handlePlayback()}>
+                    {currentPlaying ? <PiPauseFill size={26} /> : <PiPlayFill size={26} />}
                 </button>
-                <button className="mx-2 text-white">
+                <button className="mx-2 text-white hover:text-gray-400 transition-colors">
                     <PiSkipForwardFill size={24} />
                 </button>
             </div>
+
+            {/* Time and Volume Controls */}
             <div className="flex items-center">
-                <audio controls className="hidden" />
-                <div className="text-white text-xs">00:00 / 00:00</div>
-                <input type="range" className="mx-4" />
-                <button className="text-white">100%</button>
+                <div className="text-white text-xs mr-2">1:23</div>
+                <input type="range" className="mx-2 w-32 h-1 bg-gray-400 rounded-lg cursor-pointer" />
+                <div className="text-white text-xs ml-2">2:34</div>
+                <button className="mx-2 text-white hover:text-gray-400 transition-colors">50%</button>
             </div>
         </div>
+
     );
 };
 

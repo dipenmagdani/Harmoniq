@@ -2,12 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SongContext from '../../contexts/SongContext';
 import NavBar from '../HomePage/NavBar';
-import { PiPlayFill } from "react-icons/pi";
-import { WaveSpinner } from "react-spinners-kit"; // Ensure you have this spinner or replace with your preferred one
+import { PiPlayFill, PiPauseFill } from "react-icons/pi";
+import { Bars } from 'react-loader-spinner';
 import MusicPlayer from '../MusicPlayer/MusicPlayer';
+import useAudioPlayback from '../../hooks/useAudioPlayback';
 export const PlaylistDetails = () => {
     const API = "https://jiosaavn-api-latest-osvc5k0j6-dipenmagdanis-projects.vercel.app";
     const { id } = useParams();
+    const { currentPlaying, handlePlayback } = useAudioPlayback();
+
     const { playlistDetails, setPlaylistDetails } = useContext(SongContext);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -24,7 +27,6 @@ export const PlaylistDetails = () => {
     };
 
     useEffect(() => {
-        setPlaylistDetails(null); // Clear previous playlist details
 
         setTimeout(() => {
             fetchSongData();
@@ -43,14 +45,21 @@ export const PlaylistDetails = () => {
         <>
             <NavBar />
             <MusicPlayer />
-            <div className="main-container flex pt-2 ml-64">  {/* Adjusted for flex layout and added margin-left */}
-                <div className="main-content flex-grow flex flex-col p-2"> {/* Main content takes the remaining space */}
-                    {isLoading && (
-                        <div className="flex items-center justify-center">
-                            <WaveSpinner size={50} />
-                        </div>
-                    )}
-                    <div className={`flex flex-col p-10 w-full ${isLoading ? 'blur-3xl' : ''}`}>
+            <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">  {/* Adjusted for flex layout and added margin-left */}
+                {isLoading ? (
+                    <div className="flex items-center justify-center w-full h-full">
+                        <Bars
+                            height="80"
+                            width="100"
+                            color="white"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
+                        />
+                    </div>
+                ) : (
+                    <div className='flex flex-col p-10 w-full '>
                         <>
                             <div className="upper-part p-5 max-w-4xl">
                                 <div className="header flex gap-7">
@@ -89,15 +98,18 @@ export const PlaylistDetails = () => {
                                             {formatDuration(song.duration)}
                                         </div>
                                         <div className="playButton cursor-pointer transition-all duration-400 hover:scale-150 ml-4 mt-1">
-                                            <button><PiPlayFill /></button>
+                                            <button onClick={() => handlePlayback(song)}>
+                                                {currentPlaying === song ? <PiPauseFill /> : <PiPlayFill />}
+                                            </button>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </>
                     </div>
-                </div>
+                )}
             </div>
+
         </>
     );
 };
