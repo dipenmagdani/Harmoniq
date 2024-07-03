@@ -2,8 +2,8 @@ import React from 'react'
 import SongCard from './SongCard'
 import { useContext } from 'react'
 import SongContext from '../../contexts/SongContext'
-const Section = ({ title, data, displayText, isLoading }) => {
-    const { isLoadingCard, searchQuery, setSearchQuery } = useContext(SongContext)
+const Section = ({ title, data, isLoading }) => {
+    const { isLoadingCard } = useContext(SongContext)
 
     return (
         <>
@@ -12,7 +12,7 @@ const Section = ({ title, data, displayText, isLoading }) => {
                 <div className='flex flex-row gap-4 overflow-x-auto min-w-full'>
                     <div className='flex-shrink-0 flex gap-5'>
                         {data.map((item, index) => (
-                            <SongCard key={index} items={item} displayText={displayText} isLoading={isLoading} />
+                            <SongCard key={index} items={item} isLoading={isLoading} />
                         ))}
                     </div>
                 </div>
