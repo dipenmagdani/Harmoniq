@@ -8,18 +8,18 @@ import MusicPlayer from '../MusicPlayer/MusicPlayer';
 const SearchSong = () => {
     const { name } = useParams();
     const { isLoadingCard, setIsLoadingCard } = useContext(SongContext)
-    const API = 'https://api-jiosaavn-inky.vercel.app/api'
+    const API = import.meta.env.VITE_HARMONIQ_API_KEY;
     const [searchData, setSearchData] = useState(null)
 
     const fetchData = async () => {
         try {
             setIsLoadingCard(true)
-            const response = await fetch(`${API}/search?query=${name}`)
+            const response = await fetch(`${API}/search?q=${name}`)
             const { data } = await response.json()
             // console.log(data)
-            let { albums, artists, playlists, songs, topQuery } = data;
+            let { albums, artists, playlists, songs, top_query: topQuery, shows, episodes } = data;
             let dataFromApi = {
-                albums, artists, playlists, songs, topQuery
+                albums, artists, playlists, songs, topQuery, shows, episodes
             }
             setSearchData(dataFromApi)
 
@@ -34,28 +34,64 @@ const SearchSong = () => {
     return (
         <>
             <NavBar />
-            <div className='song_data'>
-                <div className='song_data'>
-                    <SectionSearch
-                        title={"Top"}
-                        data={searchData?.topQuery?.results || []}
-                        displayText="false"
-                    />
-                    <SectionSearch
-                        title={"Album"}
-                        data={searchData?.albums?.results || []}
-                        displayText="false"
-                    />
-                    <SectionSearch
-                        title={"Playlists"}
-                        data={searchData?.playlists?.results || []}
-                        displayText="false"
-                    />
-                    <SectionSearch
-                        title={"Songs"}
-                        data={searchData?.songs?.results || []}
-                        displayText="false"
-                    />
+            <div className='song_data h-72'>
+                <div className='song_data h-72 '>
+                    {
+                        searchData?.topQuery?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Top"}
+                                data={searchData?.topQuery?.data || []}
+                            />
+                        )
+                    }
+                    {
+                        searchData?.album?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Albums"}
+                                data={searchData?.albums?.data || []}
+                            />
+                        )
+                    }
+                    {
+                        searchData?.playlists?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Playlists"}
+                                data={searchData?.playlists?.data || []}
+                            />
+                        )
+                    }
+                    {
+                        searchData?.songs?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Songs"}
+                                data={searchData?.songs?.data || []}
+                            />
+                        )
+                    }
+                    {
+                        searchData?.artists?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Artists"}
+                                data={searchData?.artists?.data || []}
+                            />
+                        )
+                    }
+                    {
+                        searchData?.shows?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Shows"}
+                                data={searchData?.shows?.data || []}
+                            />
+                        )
+                    }
+                    {
+                        searchData?.episodes?.data?.length > 0 && (
+                            <SectionSearch
+                                title={"Episodes"}
+                                data={searchData?.episodes?.data || []}
+                            />
+                        )
+                    }
                 </div>
             </div>
             <MusicPlayer />

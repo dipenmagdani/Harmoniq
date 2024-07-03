@@ -12,7 +12,7 @@ const NavBar = () => {
         <>
             <Toaster richColors position='bottom-center' />
 
-            <aside id="separator-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-black border-e-2 border-x-slate-600" aria-label="Sidebar">
+            <aside id="separator-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-black border-e-2 border-x-slate-600 " aria-label="Sidebar">
                 <div className="h-full px-3 py-4 overflow-y-auto">
                     <ul className="space-y-2 font-medium">
                         <li>

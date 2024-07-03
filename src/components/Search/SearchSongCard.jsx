@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { WaveSpinner } from "react-spinners-kit"; // Ensure you have this spinner or replace with your preferred one
 import { useContext, useEffect } from 'react';
 import SongContext from '../../contexts/SongContext';
+import useLoadingBar from '../../hooks/useLoadingBar';
 const SearchSongCard = ({ items }) => {
     const { isLoadingCard, setIsLoadingCard, searchQuery, setSearchQuery } = useContext(SongContext)
-
+    const { LoadingBar } = useLoadingBar()
     useEffect(() => {
         // Simulating loading delay with setTimeout
         setTimeout(() => {
@@ -28,18 +28,18 @@ const SearchSongCard = ({ items }) => {
                 <div className="main-card w-52 h-64 bg-black pl-2 rounded-lg overflow-hidden">
                     <div className="flex items-center justify-center w-44 h-40">
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <WaveSpinner size={50} />
+                            <LoadingBar />
                         </div>
                     </div>
                 </div>
             ) : (
-                <div className="main-card w-52 h-56 bg-black pl-2 rounded-lg overflow-hidden hover:bg-neutral-800 cursor-pointer hover:opacity-80">
-                    <div className="cover-img flex items-center justify-center transition-all duration-300 hover:scale-110">
-                        <img src={Array.isArray(items.image) ? items.image[2].url : items.image} alt="" className="rounded-md w-44 h-40 object-cover" />
+                <div className="main-card h-full my-2 flex relative left-6 space-x-2 transition-all duration-300 hover:scale-110 bg-black px-4 py-7 rounded-lg hover:underline hover:bg-neutral-800 cursor-pointer hover:opacity-80 hover:rounded-full ">
+                    <div className="cover-img flex ">
+                        <img src={Array.isArray(items.image) ? items.image[2].link : items.image} alt="" className="rounded-full     w-24 h-24  object-cover" />
                     </div>
-                    <div className="p-2 w-56">
-                        <h1 className="text-white font-extrabold text-md text-pretty">{
-                            items.title.replace(/&quot;/g, "")
+                    <div className="py-2 text-wrap ">
+                        <h1 className="text-white text-wrap font-extrabold truncate ">{
+                            items.name.replace(/&quot;/g, "")
                         }</h1>
                         <h2 className="text-slate-50 opacity-50 text-sm text-wrap">{items.artist}</h2>
                     </div>
