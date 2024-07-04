@@ -1,13 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 
-const useApi = (endpoint, id, setData) => {
+const useApi = (urlOrEndpoint, id, setData) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_HARMONIQ_API_KEY}/${endpoint}?id=${id}`
-      );
+      let url;
+      if (urlOrEndpoint.includes("http")) {
+        // If the urlOrEndpoint is a full URL, use it directly
+        url = urlOrEndpoint;
+      } else {
+        // Otherwise, construct the URL
+        url = `${
+          import.meta.env.VITE_HARMONIQ_API_KEY
+        }/${urlOrEndpoint}?id=${id}`;
+      }
+
+      const response = await fetch(url);
       const { data } = await response.json();
       setData(data);
       setIsLoading(false);
@@ -15,7 +24,7 @@ const useApi = (endpoint, id, setData) => {
       console.log(error);
       setIsLoading(false);
     }
-  }, [endpoint, id, setData]);
+  }, [urlOrEndpoint, id, setData]);
 
   useEffect(() => {
     setTimeout(() => {

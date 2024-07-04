@@ -74,7 +74,7 @@ const HomePage = () => {
       <NavBar />
       <MusicPlayer />
 
-      <div className="song_data">
+      <div className="song_data mx-3">
         <div className="song_data">
           {songDetails?.trending?.data?.length > 0 && (
             <Section
