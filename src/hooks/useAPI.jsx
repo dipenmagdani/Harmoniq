@@ -1,35 +1,37 @@
 import { useState, useEffect, useCallback } from "react";
 
-const useApi = (urlOrEndpoint, id, setData) => {
+const useApi = (endpoint, id, setData) => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const cleanId = "";
+  const url = "";
   const fetchData = useCallback(async () => {
     try {
-      let url;
-      if (urlOrEndpoint.includes("http")) {
-        // If the urlOrEndpoint is a full URL, use it directly
-        url = urlOrEndpoint;
-      } else {
-        // Otherwise, construct the URL
-        url = `${
-          import.meta.env.VITE_HARMONIQ_API_KEY
-        }/${urlOrEndpoint}?id=${id}`;
+      let url = `${endpoint}${cleanId}`; // Construct URL correctly
+
+      // Remove trailing "=" from id if present
+      if (id && id.includes("=")) {
+        // Remove trailing "=" from id if present
+        const cleanId = id.replace(/=$/, "");
+        url = `${endpoint}/${cleanId}`; // Construct URL with cleaned id
+      } else if (id) {
+        url = `${endpoint}/${id}`; // Construct URL with original id
       }
 
       const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const { data } = await response.json();
       setData(data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Fetch data error:", error.message);
       setIsLoading(false);
     }
-  }, [urlOrEndpoint, id, setData]);
+  }, [endpoint, id, setData]);
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchData();
-    }, 1500);
+    fetchData();
     window.scrollTo(0, 0);
   }, [fetchData]);
 

@@ -9,6 +9,7 @@ import { PlaylistDetails } from "./components/Genre/PlaylistDetails";
 import SearchSong from "./components/Search/SearchSong";
 import SongDetails from "./components/Genre/SongDetails";
 import SearchByType from "./components/Search/SearchByType";
+import SkeletonCard from "./components/CardComponent/SkeletonCard";
 export const App = () => {
   return (
     <SongProvider>
@@ -29,6 +30,7 @@ export const App = () => {
           <Route path="/search/:name/:type" element={<SearchByType />} />
 
           <Route path="top-trending" element={<TopTrending />} />
+          <Route path="/maincard" element={<SkeletonCard />} />
         </Routes>
       </BrowserRouter>
     </SongProvider>

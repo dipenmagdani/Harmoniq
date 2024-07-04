@@ -11,34 +11,40 @@ const SearchByType = () => {
   const { name, type } = useParams();
   const { searchTypeData, setSearchTypeData } = useContext(SongContext);
   const { LoadingBar } = useLoadingBar();
-  const { isLoading } = useApi(
-    `${import.meta.env.VITE_HARMONIQ_API_KEY}/search/${type}?q=${name}&n=100`,
-    null,
-    setSearchTypeData
-  );
+
+  const genre = () => {
+    switch (type) {
+      case "playlists":
+        return "/api/search/playlist";
+      case "albums":
+        return "/api/search/album";
+      case "songs":
+        return "/api/search/song";
+      default:
+        return "/api/search/song";
+    }
+  };
+
+  const { isLoading } = useApi(genre(), name, setSearchTypeData);
 
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <NavBar />
-      <MusicPlayer />
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 overflow-x-auto min-w-full">
-        {/* <div className="flex flex-row gap-4 ">
-        <div className="flex-shrink-0 flex gap-5">
-          {data.map((item, index) => (
-            <SearchSongCard key={index} items={item} />
-          ))}
-        </div>
-      </div> */}
+      <div className="flex-grow overflow-y-auto px-4 py-6">
         {isLoading ? (
-          <LoadingBar />
+          <div className="flex justify-center items-center h-full">
+            <LoadingBar />
+          </div>
         ) : (
-          searchTypeData?.results?.map((item, index) => (
-            <SearchSongCard key={index} items={item} />
-          ))
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {searchTypeData?.results?.map((item, index) => (
+              <SearchSongCard key={index} items={item} />
+            ))}
+          </div>
         )}
       </div>
-    </>
+      <MusicPlayer />
+    </div>
   );
 };
 
