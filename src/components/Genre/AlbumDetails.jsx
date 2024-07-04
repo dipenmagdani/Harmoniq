@@ -11,8 +11,8 @@ export const AlbumDetails = () => {
   const { id } = useParams();
   const { albumDetails, setAlbumDetails } = useContext(SongContext);
   const { LoadingBar } = useLoadingBar();
-  const { isLoading } = useApi("album", id, setAlbumDetails);
-
+  const { isLoading } = useApi("/api/album/", id, setAlbumDetails);
+  console.log(albumDetails);
   return (
     <>
       <NavBar />

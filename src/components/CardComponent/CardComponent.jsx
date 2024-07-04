@@ -9,6 +9,8 @@ const CardComponent = ({ data }) => {
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
   console.log(data?.download_url);
+  // const isSongType = data?.songs?.type === "song";
+  // console.log(isSongType);
   return (
     <>
       <div className="main-content flex-grow flex flex-col p-2">

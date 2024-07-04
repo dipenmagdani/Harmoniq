@@ -12,8 +12,14 @@ export const SongDetails = () => {
   const { songData, setSongData } = useContext(SongContext);
   const { LoadingBar } = useLoadingBar();
 
-  const { isLoading } = useApi("song", id, setSongData);
-
+  const { isLoading } = useApi("/api/song", id, setSongData);
+  useEffect(() => {
+    if (songData?.songs) {
+      // Assuming 'results' is the key holding the actual song data
+      setSongData(songData.songs[0]); // Adjust according to your API response structure
+    }
+  }, [songData, setSongData]);
+  console.log(songData);
   return (
     <>
       <NavBar />
@@ -24,7 +30,7 @@ export const SongDetails = () => {
             <LoadingBar />
           </div>
         ) : (
-          <CardComponent data={songData?.songs[0]} />
+          <CardComponent data={songData} />
         )}
       </div>
     </>

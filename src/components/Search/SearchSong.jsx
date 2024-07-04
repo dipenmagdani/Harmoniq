@@ -5,46 +5,19 @@ import SectionSearch from "./SectionSearch";
 import SongContext from "../../contexts/SongContext";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import SearchByType from "../Search/SearchByType";
+import useApi from "../../hooks/useAPI";
 const SearchSong = () => {
   const { name } = useParams();
   const { isLoadingCard, setIsLoadingCard } = useContext(SongContext);
-  const API = import.meta.env.VITE_HARMONIQ_API_KEY;
   const [searchData, setSearchData] = useState(null);
+  const {} = useApi("/api/search/", name, setSearchData);
 
-  const fetchData = async () => {
-    try {
-      setIsLoadingCard(true);
-      const response = await fetch(`${API}/search?q=${name}`);
-      const { data } = await response.json();
-      let {
-        albums,
-        artists,
-        playlists,
-        songs,
-        top_query: topQuery,
-        shows,
-        episodes,
-      } = data;
-      let dataFromApi = {
-        albums,
-        artists,
-        playlists,
-        songs,
-        topQuery,
-        shows,
-        episodes,
-      };
-      setSearchData(dataFromApi);
-      setIsLoadingCard(false);
-    } catch (error) {
-      console.log(error);
-      setIsLoadingCard(false);
-    }
-  };
+  // const { albums, artists, playlists, songs, topQuery, shows, episodes } =
+  //   searchData;
 
   useEffect(() => {
-    fetchData(name);
-  }, [name]);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -52,42 +25,42 @@ const SearchSong = () => {
       <div className="song_data h-72 ">
         {/* {searchData?.topQuery?.data?.length > 0 && (
           <SectionSearch
-            title={"Top"}
+            title={isLoadingCard ? "  " :"Top"}
             data={searchData?.topQuery?.data || []}
             viewAllLink={`/search/top/${name}`}
           />
         )} */}
         {searchData?.albums?.data?.length > 0 && (
           <SectionSearch
-            title={"Albums"}
+            title={isLoadingCard ? "  " : "Albums"}
             data={searchData?.albums?.data || []}
             viewAllLink={`/search/${name}/albums`}
           />
         )}
         {searchData?.playlists?.data?.length > 0 && (
           <SectionSearch
-            title={"Playlists"}
+            title={isLoadingCard ? "  " : "Playlists"}
             data={searchData?.playlists?.data || []}
             viewAllLink={`/search/${name}/playlists`}
           />
         )}
         {searchData?.songs?.data?.length > 0 && (
           <SectionSearch
-            title={"Songs"}
+            title={isLoadingCard ? "  " : "Songs"}
             data={searchData?.songs?.data || []}
             viewAllLink={`/search/${name}/songs`}
           />
         )}
         {/* {searchData?.artists?.data?.length > 0 && (
           <SectionSearch
-            title={"Artists"}
+            title={isLoadingCard ? "  " :"Artists"}
             data={searchData?.artists?.data || []}
             viewAllLink={`/search/${name}/artists`}
           />
         )} */}
         {searchData?.episodes?.data?.length > 0 && (
           <SectionSearch
-            title={"Episodes"}
+            title={isLoadingCard ? "  " : "Episodes"}
             data={searchData?.episodes?.data || []}
             viewAllLink={`/search/${name}/episodes`}
           />

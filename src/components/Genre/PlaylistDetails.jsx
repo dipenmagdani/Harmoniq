@@ -11,14 +11,13 @@ export const PlaylistDetails = () => {
   const { LoadingBar } = useLoadingBar();
   const { playlistDetails, setPlaylistDetails } = useContext(SongContext);
 
-  const { isLoading } = useApi("playlist", id, setPlaylistDetails);
-
+  const { isLoading } = useApi("/api/playlist", id, setPlaylistDetails);
+  console.log(playlistDetails);
   return (
     <>
       <NavBar />
       <MusicPlayer />
       <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">
-        {" "}
         {/* Adjusted for flex layout and added margin-left */}
         {isLoading ? (
           <div className="flex items-center justify-center w-full h-full flex-col">
