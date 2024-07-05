@@ -5,6 +5,7 @@ import SongContext from "../../contexts/SongContext";
 import NavBar from "../HomePage/NavBar";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import useLoadingBar from "../../hooks/useLoadingBar";
+import UpperBar from "../HomePage/UpperBar";
 // import SearchTypeCard from "./SearchTypeCard";
 const SearchTypeCard = React.lazy(() => import("./SearchTypeCard"));
 
@@ -31,22 +32,25 @@ const SearchByType = () => {
   //   <SearchTypeCard key={index} items={item} />
   // ))}
   return (
-    <div className="p-4 sm:ml-64 " style={{ background: "#1c1c1c" }}>
-      <NavBar />
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="p-3 text-4xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
-          {type.slice(0, 1).toUpperCase() + type.slice(1)}
-        </h1>
-      </div>
+    <>
+      <div className="sm:ml-64 my-5" style={{ background: "#1c1c1c" }}>
+        <NavBar />
+        <UpperBar />
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="p-3 text-4xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+            {type.slice(0, 1).toUpperCase() + type.slice(1)}
+          </h1>
+        </div>
 
-      <div className="p-3 grid grid-cols-5 gap-8">
-        {searchTypeData?.results?.map((item, index) => (
-          <React.Suspense fallback={<LoadingBar />}>
-            <SearchTypeCard key={index} items={item} />
-          </React.Suspense>
-        ))}
+        <div className="p-3 grid grid-cols-5 gap-8">
+          {searchTypeData?.results?.map((item, index) => (
+            <React.Suspense fallback={<LoadingBar />}>
+              <SearchTypeCard key={index} items={item} />
+            </React.Suspense>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

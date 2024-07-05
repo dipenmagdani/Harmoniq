@@ -6,6 +6,8 @@ import SongContext from "../../contexts/SongContext";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import SearchByType from "../Search/SearchByType";
 import useApi from "../../hooks/useAPI";
+import UpperBar from "../HomePage/UpperBar";
+import useLoadingBar from "../../hooks/useLoadingBar";
 const SearchSong = () => {
   const { name } = useParams();
   const {
@@ -16,6 +18,7 @@ const SearchSong = () => {
     searchQuery,
   } = useContext(SongContext);
   const {} = useApi("/api/search/", name, setSearchData);
+  const { LoadingBar } = useLoadingBar();
 
   // const { albums, artists, playlists, songs, topQuery, shows, episodes } =
   //   searchData;
@@ -27,13 +30,17 @@ const SearchSong = () => {
   return (
     <>
       <NavBar />
+      <UpperBar />
+
       {!searchQuery ? (
         <div className="flex min-h-screen flex-col items-center justify-center content-center ">
           <div className="text-7xl text-red-700 p-3">404 Not Found</div>
-          <div className="text-xl text-white">Please Use Search Box...</div>
+          <div className="text-xl text-white cursor-pointer">
+            Please use Search Box...
+          </div>
         </div>
       ) : (
-        <div className="song_data h-72 ">
+        <div className="song_data h-72 my-10">
           {searchData?.topQuery?.data?.length > 0 && (
             <SectionSearch
               title={isLoadingCard ? "  " : "Top"}

@@ -11,7 +11,7 @@ const Section = ({ title, data, isLoading }) => {
   return (
     <>
       <div className="p-4 sm:ml-64 ">
-        <h1 className="pb-4 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+        <h1 className="pb-2 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
           {isLoadingCard ? "" : title}
         </h1>
         <div className="flex flex-row gap-4 overflow-x-auto min-w-full no-scrollbar">
@@ -24,6 +24,7 @@ const Section = ({ title, data, isLoading }) => {
           </div>
         </div>
       </div>
+      <div className="min-w-full relative top-2 bg-white/40 h-[1.3px]"></div>
     </>
   );
 };

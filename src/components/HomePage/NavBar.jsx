@@ -7,125 +7,97 @@ import { Toaster, toast } from "sonner";
 import SongContext from "../../contexts/SongContext";
 
 const NavBar = () => {
-  const { searchQuery, setSearchQuery } = useContext(SongContext);
-  const navigate = useNavigate();
-  const [localSearchQuery, setLocalSearchQuery] = useState("");
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    if (localSearchQuery.trim()) {
-      setSearchQuery(localSearchQuery);
-      navigate(`/search/${localSearchQuery}`);
-    }
-  };
-
   return (
     <>
       <Toaster richColors position="bottom-center" />
       <aside
         id="separator-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen"
+        className="fixed top-0 left-0 z-40 w-64 h-screen border-r-2 border-white/20"
         aria-label="Sidebar"
         style={{ background: "#161616" }}
       >
         <div className="h-full px-3 py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
             <li>
-              <Link to="/" className="flex items-center p-2 text-white">
-                <img src="../music-logo.png" alt="" width={100} />
-                <span className="ms-1 text-2xl">Harmoniq</span>
+              <Link
+                to="/"
+                className="flex h-32 items-center justify-center text-white  "
+              >
+                <img src="../../harmoniq.png" alt="" className="w-48" />
+                {/* <span className="ms-1 text-2xl">Harmoniq</span> */}
               </Link>
             </li>
-            <li>
-              <form className="max-w-md" onSubmit={handleSearchSubmit}>
-                <label
-                  htmlFor="default-search"
-                  className="mb-2 text-sm font-medium text-white sr-only"
-                >
-                  Search
-                </label>
-                <div className="relative">
-                  <input
-                    type="search"
-                    id="default-search"
-                    className="block w-full p-4 text-white bg-black rounded-lg text-xs font-base bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent border border-white/20"
-                    placeholder="Search Songs, Albums"
-                    value={localSearchQuery}
-                    onChange={(e) => setLocalSearchQuery(e.target.value)}
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="text-white rounded-full absolute right-2.5 bottom-2.5 text-sm border border-white/20 font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent bg-blue-700 hover:bg-blue-800 px-4 py-2 hover:border-white/50 hover:text-white"
-                  >
-                    <svg
-                      className="w-4 h-4 text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </form>
+            <li></li>
+            <li className="relative top-3">
+              <span className="text-4xl font-bold bg-gradient-to-r from-red-500/80 to-white/70 bg-clip-text text-transparent pl-2">
+                Discover
+              </span>
             </li>
-            <li>
-              <span className="ml-3 text-3xl text-white">Discover</span>
-            </li>
-            <div className="p-4">
+            <div className="space-y-3 pl-4 p-4">
               <li>
                 <Link
-                  className="flex items-center p-2 text-white hover:bg-gray-700 rounded-lg"
+                  className="flex items-center p-2 text-white hover:bg-white/20 rounded-lg border-2 border-white/30"
                   to="/top-trending"
                 >
-                  <TbTrendingUp />
-                  <span className="ml-3">Top Trending</span>
+                  <div className="text-lg font-bold bg-gradient-to-r text-red-300">
+                    <TbTrendingUp />
+                  </div>
+                  <span className="ml-3 text-lg font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+                    Top Trending
+                  </span>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#"
+                  className="flex items-center p-2 text-white hover:bg-white/20 rounded-lg border-2 border-white/30"
+                >
+                  <div className="text-lg font-bold bg-gradient-to-r text-red-300">
+                    <BsBarChartSteps />
+                  </div>
+                  <span className="ml-3 text-lg font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+                    Top Charts
+                  </span>
                 </Link>
               </li>
               <li>
                 <a
                   href="#"
-                  className="flex items-center p-2 text-white hover:bg-gray-700 rounded-lg"
+                  className="flex items-center p-2 text-white hover:bg-white/20 rounded-lg border-2 border-white/30"
                 >
-                  <BsBarChartSteps />
-                  <span className="ml-3">Top Charts</span>
+                  <div className="text-lg font-bold bg-gradient-to-r text-red-300">
+                    <TbPlaylist />
+                  </div>
+                  <span className="ml-3 text-lg font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+                    Top Playlists
+                  </span>
                 </a>
               </li>
               <li>
                 <a
                   href="#"
-                  className="flex items-center p-2 text-white hover:bg-gray-700 rounded-lg"
+                  className="flex items-center p-2 text-white hover:bg-white/20 rounded-lg border-2 border-white/30"
                 >
-                  <TbPlaylist />
-                  <span className="ml-3">Top Playlists</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center p-2 text-white hover:bg-gray-700 rounded-lg"
-                >
-                  <LiaMicrophoneAltSolid />
-                  <span className="ml-3">Top Artists</span>
+                  <div className="text-lg font-bold bg-gradient-to-r text-red-300">
+                    <LiaMicrophoneAltSolid />
+                  </div>
+                  <span className="ml-3 text-lg font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+                    Top Artists
+                  </span>
                 </a>
               </li>
             </div>
           </ul>
-          <ul className="space-y-2 font-medium">
+          <div className="w-full bg-white/40 h-[1.3px]"></div>
+          <ul className="space-y-4 font-bold mt-4">
             <li>
-              <span className="ml-3 text-3xl text-white">Playlist</span>
+              <span className="text-4xl font-bold bg-gradient-to-r from-red-500/80 to-white/70 bg-clip-text text-transparent pl-2">
+                Playlist
+              </span>
             </li>
-            <div className="ml-9 mt-4">
+            <div className="flex flex-col items-center ">
               <button
-                className="bg-white text-gray-800 w-40 h-9 flex justify-center items-center gap-2 rounded-md hover:bg-gray-800 hover:text-white"
+                className="bg-transparent border-2 border-white/30 text-red-400 w-40 h-9 flex justify-center items-center gap-2 rounded-md hover:bg-white/20 "
                 onClick={() => toast.info("Coming Soon...")}
               >
                 <TbPlaylistAdd className="text-xl" />
