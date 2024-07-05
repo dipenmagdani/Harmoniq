@@ -1,20 +1,25 @@
 import React from "react";
-import SongCard from "./SongCard";
+const SongCard = React.lazy(() => import("./SongCard"));
+import useLoadingBar from "../../hooks/useLoadingBar";
 import { useContext } from "react";
 import SongContext from "../../contexts/SongContext";
+import SkeletonCard from "../CardComponent/SkeletonCard";
 const Section = ({ title, data, isLoading }) => {
   const { isLoadingCard } = useContext(SongContext);
+  const { LoadingBar } = useLoadingBar();
 
   return (
     <>
-      <div className="p-4 sm:ml-64">
-        <h1 className="p-3 text-2xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
+      <div className="p-4 sm:ml-64 ">
+        <h1 className="pb-4 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
           {isLoadingCard ? "" : title}
         </h1>
-        <div className="flex flex-row gap-4 overflow-x-auto min-w-full">
-          <div className="flex-shrink-0 flex gap-5">
+        <div className="flex flex-row gap-4 overflow-x-auto min-w-full no-scrollbar">
+          <div className="flex-shrink-0 flex gap-5 ">
             {data.map((item, index) => (
-              <SongCard key={index} items={item} isLoading={isLoading} />
+              <React.Suspense fallback={<SkeletonCard />}>
+                <SongCard key={index} items={item} isLoading={isLoading} />
+              </React.Suspense>
             ))}
           </div>
         </div>

@@ -41,19 +41,19 @@ app.get("/api/song/:id", (req, res) =>
 );
 app.get("/api/search", (req, res) => handleApiRequest(req, res, `/search/top`));
 app.get("/api/search/:name", (req, res) =>
-  handleApiRequest(req, res, `/search?q=${req.params.name}`)
+  handleApiRequest(req, res, `/search?q=${req.params.name}&n=100&page=1`)
 );
 app.get("/api/search/album/:q", (req, res) =>
   handleApiRequest(req, res, `/search/albums?q=${req.params.q}&n=100&page=1`)
 );
 app.get("/api/search/playlist/:q", (req, res) =>
-  handleApiRequest(req, res, `/search/playlists?q=${req.params.q}`)
+  handleApiRequest(req, res, `/search/playlists?q=${req.params.q}&n=100&page=1`)
 );
 app.get("/api/search/song/:q", (req, res) =>
-  handleApiRequest(req, res, `/search/songs?q=${req.params.q}`)
+  handleApiRequest(req, res, `/search/songs?q=${req.params.q}&n=100&page=1`)
 );
 app.get("/api/search/artist/:q", (req, res) =>
-  handleApiRequest(req, res, `/search/artists?q=${req.params.q}`)
+  handleApiRequest(req, res, `/search/artists?q=${req.params.q}&n=100&page=1`)
 );
 
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
