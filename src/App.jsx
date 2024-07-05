@@ -17,6 +17,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+
           <Route path="album/:id" element={<AlbumDetails />} />
           <Route path="playlist/:id" element={<PlaylistDetails />} />
           <Route path="song/:id" element={<SongDetails />} />

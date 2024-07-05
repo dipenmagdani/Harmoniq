@@ -13,7 +13,7 @@ const SearchSongCard = ({ items }) => {
     setTimeout(() => {
       setIsLoadingCard(false);
     }, 2000);
-  }, [items]);
+  }, [items, searchQuery]);
 
   const type = items.type;
   const generateLink = () => {
@@ -42,29 +42,31 @@ const SearchSongCard = ({ items }) => {
         </div>
       ) : (
         searchQuery && (
-          <div className="relative w-52 h-52 rounded-tl-3xl rounded-br-3xl cursor-pointer hover:animate-pulse group">
-            <img
-              src={
-                Array.isArray(items.image) ? items.image[2].link : items.image
-              }
-              alt=""
-              className="w-full h-full object-cover rounded-tl-3xl rounded-br-3xl opacity-55"
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-black to-rose-950/75 text-white p-4 rounded-tl-3xl rounded-br-3xl text-pretty">
-              <div className="text-pretty overflow-x-visible">
-                <h1 className="text-xl font-bold bg-gradient-to-r underline from-slate-50 to-neutral-300 bg-clip-text text-transparent truncate">
-                  {items.name.replace(/&quot;/g, "")}
-                </h1>
-              </div>
-              <div className="text-nowrap overflow-x-auto">
-                <h5 className="text-[11px] font-medium text-zinc-200 truncate">
-                  {items.subtitle}
+          <div className="border-2 p-2 rounded-md border-white/35 hover:border-white/60 transition-all duration-500 bg-stone-700/20">
+            <div className="relative w-52 h-52 rounded-tl-3xl rounded-br-3xl cursor-pointer hover:animate-pulse group">
+              <img
+                src={
+                  Array.isArray(items.image) ? items.image[2].link : items.image
+                }
+                alt=""
+                className="w-full h-full object-cover rounded-tl-3xl rounded-br-3xl opacity-55"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-black to-rose-950/75 text-white p-4 rounded-tl-3xl rounded-br-3xl text-pretty">
+                <div className="text-pretty overflow-x-visible">
+                  <h1 className="text-xl font-bold bg-gradient-to-r underline from-slate-50 to-neutral-300 bg-clip-text text-transparent truncate">
+                    {items.name.replace(/&quot;/g, "")}
+                  </h1>
+                </div>
+                <div className="text-nowrap overflow-x-auto">
+                  <h5 className="text-[11px] font-medium text-zinc-200 truncate">
+                    {items.subtitle}
+                  </h5>
+                </div>
+                <h5 className="text-start text-[11px] font-medium text-zinc-500 relative top-2">
+                  {items.type.slice(0, 1).toUpperCase()}
+                  {items.type.slice(1) + "*"}
                 </h5>
               </div>
-              <h5 className="text-start text-[11px] font-medium text-zinc-500 relative top-2">
-                {items.type.slice(0, 1).toUpperCase()}
-                {items.type.slice(1) + "*"}
-              </h5>
             </div>
           </div>
         )
