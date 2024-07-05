@@ -13,6 +13,7 @@ export const SongProvider = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
   const [songData, setSongData] = useState(null);
+  const [searchData, setSearchData] = useState(null);
   const [searchTypeData, setSearchTypeData] = useState(null);
   const audioRef = useRef(new Audio());
 
@@ -40,6 +41,8 @@ export const SongProvider = (props) => {
         setSongData,
         searchTypeData,
         setSearchTypeData,
+        searchData,
+        setSearchData,
       }}
     >
       {props.children}

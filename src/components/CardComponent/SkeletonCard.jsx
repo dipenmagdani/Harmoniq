@@ -3,7 +3,7 @@ import React from "react";
 const SkeletonCard = () => {
   return (
     <>
-      <div className="relative max-w-sm rounded-tl-3xl rounded-br-3xl w-60 h-60 animate-pulse bg-zinc-800 border-2 border-gray-400 ">
+      <div className="relative max-w-sm rounded-tl-3xl rounded-br-3xl w-52 h-52 animate-pulse bg-zinc-800 border-2 border-gray-400 ">
         <img
           className="rounded-tl-3xl rounded-br-3xl opacity-80 bg-slate-300 animate-pulse"
           src=""

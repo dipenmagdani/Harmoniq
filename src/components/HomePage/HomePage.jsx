@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import NavBar from "./NavBar";
 import SongContext from "../../contexts/SongContext";
-import Section from "./Section";
+const Section = React.lazy(() => import("./Section"));
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import useApi from "../../hooks/useAPI";
 const HomePage = () => {
@@ -49,8 +49,8 @@ const HomePage = () => {
     <>
       <NavBar />
       <MusicPlayer />
-      <div className="song_data mx-3 " style={{ background: "#1c1c1c" }}>
-        <div className="song_data">
+      <div className="song_data mx-3 ">
+        <div className="song_data ">
           {trending?.data?.length > 0 && (
             <Section title={trending.title} data={trending.data} />
           )}
