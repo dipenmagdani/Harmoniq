@@ -1,16 +1,18 @@
-import React from "react";
-import useAudioPlayback from "../../hooks/useAudioPlayback";
+import React, { useContext } from "react";
+// import useAudioPlayback from "../../hooks/useAudioPlayback";
 import { PiPlayFill, PiPauseFill } from "react-icons/pi";
+import SongContext from "../../contexts/SongContext";
 const CardComponent = ({ data }) => {
-  const { currentPlaying, handlePlayback } = useAudioPlayback();
   const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
-  console.log(data?.download_url);
   // const isSongType = data?.songs?.type === "song";
   // console.log(isSongType);
+  const { currentSong, playMusic, isPlaying, setCurrentTrack } =
+    useContext(SongContext);
+  // console.log(data);
   return (
     <>
       <div className="main-content flex-grow flex flex-col p-2">
@@ -57,20 +59,21 @@ const CardComponent = ({ data }) => {
                   <span className="song-number mr-4">1</span>
                   <div className="song-info">
                     <h3 className="song-title">{data?.name}</h3>
-                    <p className="song-artist text-sm text-gray-400 overflow-x-auto whitespace-nowrap max-w-full">
-                      {data?.artist_map?.artists
-                        ?.map((a_name) => a_name.name)
-                        .join(", ")
-                        .slice(0, 50) + "..."}
-                    </p>
+                    <div className="text-nowrap overflow-y-auto no-scrollbar w-72">
+                      <p className="song-artist text-sm text-gray-400 ">
+                        {data?.artist_map?.artists
+                          ?.map((a_name) => a_name.name)
+                          .join(", ")}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div className="song-duration ml-4 text-right">
                   {formatDuration(data.duration)}
                 </div>
                 <div className="playButton cursor-pointer transition-all duration-400 hover:scale-150 ml-4 mt-1">
-                  <button onClick={() => handlePlayback(data)}>
-                    {currentPlaying === data ? <PiPauseFill /> : <PiPlayFill />}
+                  <button>
+                    <PiPauseFill />
                   </button>
                 </div>
               </div>
@@ -84,20 +87,21 @@ const CardComponent = ({ data }) => {
                     <span className="song-number mr-4">{index + 1}</span>
                     <div className="song-info">
                       <h3 className="song-title">{song.name}</h3>
-                      <p className="song-artist text-sm text-gray-400 overflow-x-auto whitespace-nowrap max-w-full">
-                        {song?.artist_map?.artists
-                          ?.map((a_name) => a_name.name)
-                          .join(", ")
-                          .slice(0, 50) + "..."}
-                      </p>
+                      <div className="text-nowrap overflow-y-auto no-scrollbar w-72">
+                        <p className="song-artist text-sm text-gray-400 ">
+                          {song?.artist_map?.artists
+                            ?.map((a_name) => a_name.name)
+                            .join(", ")}
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className="song-duration ml-4 text-right">
                     {formatDuration(song.duration)}
                   </div>
                   <div className="playButton cursor-pointer transition-all duration-400 hover:scale-150 ml-4 mt-1">
-                    <button onClick={() => handlePlayback(song)}>
-                      {currentPlaying === song ? (
+                    <button onClick={() => playMusic(song, data)}>
+                      {currentSong === song && isPlaying ? (
                         <PiPauseFill />
                       ) : (
                         <PiPlayFill />

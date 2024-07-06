@@ -1,10 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import NavBar from "./NavBar";
 import SongContext from "../../contexts/SongContext";
 const Section = React.lazy(() => import("./Section"));
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import useApi from "../../hooks/useAPI";
-import UpperBar from "./UpperBar";
 const HomePage = () => {
   const { songDetails, setSongDetails } = useContext(SongContext);
 
@@ -48,10 +45,6 @@ const HomePage = () => {
 
   return (
     <>
-      <NavBar />
-      <UpperBar />
-
-      <MusicPlayer />
       <div className="song_data mx-3 my-10 ">
         <div className="song_data ">
           {trending?.data?.length > 0 && (

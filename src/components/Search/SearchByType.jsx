@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useAPI";
 import SongContext from "../../contexts/SongContext";
-import NavBar from "../HomePage/NavBar";
+import NavBar from "../NavAndSideBar/SideBar";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import useLoadingBar from "../../hooks/useLoadingBar";
-import UpperBar from "../HomePage/UpperBar";
+import UpperBar from "../NavAndSideBar/NavBar";
 // import SearchTypeCard from "./SearchTypeCard";
 const SearchTypeCard = React.lazy(() => import("./SearchTypeCard"));
 
@@ -34,8 +34,6 @@ const SearchByType = () => {
   return (
     <>
       <div className="sm:ml-64 my-5" style={{ background: "#1c1c1c" }}>
-        <NavBar />
-        <UpperBar />
         <div className="flex items-center justify-between mb-4">
           <h1 className="p-3 text-4xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
             {type.slice(0, 1).toUpperCase() + type.slice(1)}

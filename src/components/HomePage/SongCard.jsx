@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import SongContext from "../../contexts/SongContext";
@@ -28,7 +28,7 @@ const SongCard = ({ items }) => {
         return `/song/${items.id}`;
     }
   };
-  console.log(items);
+  // console.log(items);
 
   return (
     <Link className="nav-link" to={generateLink()}>

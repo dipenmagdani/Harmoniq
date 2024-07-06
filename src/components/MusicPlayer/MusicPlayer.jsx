@@ -1,75 +1,89 @@
 import React, { useContext } from "react";
 import {
-  PiPlayFill,
-  PiPauseFill,
-  PiSkipBackFill,
-  PiSkipForwardFill,
+  PiPlayLight,
+  PiPauseLight,
+  PiShuffle,
+  PiRepeat,
+  PiPlayPause,
 } from "react-icons/pi";
+import { RxTrackNext, RxTrackPrevious } from "react-icons/rx";
+import { BiVolumeFull } from "react-icons/bi";
 import SongContext from "../../contexts/SongContext";
 
 const MusicPlayer = () => {
-  const { isPlaying, currentPlaying, handlePlayback } = useContext(SongContext);
+  const { playMusic, currentSong, isPlaying } = useContext(SongContext);
+
+  // console.log(currentSong);
+
   return (
     <div
-      className={`main-div fixed bottom-0 left-0 right-0 flex items-center justify-between p-2  border-t-2 transition-all duration-500 bg-gradient-to-r from-gray-950 to-red-500 via-amber-800 to`}
+      className="fixed bottom-0  flex items-center md:w-full rounded-t-xl"
+      style={{ background: "#121217" }}
     >
-      {/* Album Cover and Song Info */}
-      <div className="flex items-center">
-        <img
-          src={
-            isPlaying?.image
-              ? isPlaying.image[2].link
-              : "https://via.placeholder.com/50"
-          }
-          alt="Album cover"
-          className="w-12 h-12 rounded-md mr-4"
-        />
-        <div>
-          <h4 className="text-white text-sm whitespace-nowrap">
-            {isPlaying?.name}
-          </h4>
-          <div className="overflow-x-scroll max-w-xs scrollbar-thin scrollbar-track-white scrollbar-thumb-black scrollbar-thumb-rounded-full">
-            <p className="text-gray-400 text-xs whitespace-nowrap">
-              {isPlaying?.artist_map?.artists
-                ?.map((a_name) => a_name.name)
-                .join(", ")
-                .slice(0, 100)}
-            </p>
+      <div className="w-full h-[70px] transition-all duration-500 rounded-t-xl border-t-4 border-red-700/70">
+        <div className="playback-details flex justify-between items-center h-full px-4 ">
+          <div className="song-details flex gap-3 justify-start ">
+            <div className="bg-gray-50 rounded-full w-9 h-9 shadow-glow shadow-zinc-700 border border-zinc-500">
+              <img
+                src={currentSong?.image?.[2]?.link}
+                alt=""
+                className="rounded-full w-9 h-9"
+              />
+            </div>
+            <div className="track-details space-y-1">
+              <h1 className="text-sm text-white/90 text-left">
+                {currentSong?.name}
+              </h1>
+              <div className="artist-name overflow-x-auto no-scrollbar w-40">
+                <p className="text-xs text-nowrap text-zinc-500/80 ">
+                  {currentSong?.artist_map?.artists
+                    .map((a_item) => a_item.name)
+                    .join()}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex space-x-10 justify-center items-center">
+            <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60">
+              <PiRepeat />
+            </div>
+            <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60">
+              <RxTrackPrevious />
+            </div>
+            <button onClick={() => playMusic(currentSong)}>
+              <div className="text-2xl rounded-full bg-red-700 hover:bg-red-500/60 w-10 h-10 flex items-center justify-center cursor-pointer">
+                {isPlaying && currentSong ? <PiPauseLight /> : <PiPlayLight />}
+              </div>
+            </button>
+            <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60">
+              <RxTrackNext />
+            </div>
+            <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60">
+              <PiShuffle />
+            </div>
+          </div>
+
+          <div className="mx-4 flex items-center ">
+            <span className="text-xs text-white/60 mr-2">0:00</span>
+            <div className="seekbar flex-grow h-1 bg-red-800/80 rounded w-72">
+              <div className="h-full w-1/3 bg-red-600 rounded-full "></div>
+            </div>
+            <span className="text-xs text-white/60 ml-2">3:45</span>
+          </div>
+
+          <div className="flex gap-3 items-center">
+            <div className="text-2xl cursor-pointer text-white/80 hover:text-white/60">
+              <BiVolumeFull />
+            </div>
+            <div className="text-2xl cursor-pointer text-white/80 hover:text-white/60">
+              <input
+                type="range"
+                className="text-red-700 appearance-auto"
+              ></input>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* Playback Controls */}
-      <div className="flex items-center justify-center flex-grow fixed right-0 left-0">
-        <button className="mx-2 text-white hover:text-gray-400 transition-colors">
-          <PiSkipBackFill size={24} />
-        </button>
-        <button
-          className="playPause mx-4 text-white hover:text-gray-400 transition-colors"
-          onClick={() => handlePlayback()}
-        >
-          {currentPlaying ? (
-            <PiPauseFill size={26} />
-          ) : (
-            <PiPlayFill size={26} />
-          )}
-        </button>
-        <button className="mx-2 text-white hover:text-gray-400 transition-colors">
-          <PiSkipForwardFill size={24} />
-        </button>
-      </div>
-
-      {/* Time and Volume Controls */}
-      <div className="flex items-center">
-        <div className="text-white text-xs mr-2">1:23</div>
-        <input
-          type="range"
-          className="mx-2 w-32 h-1 bg-gray-400 rounded-lg cursor-pointer"
-        />
-        <div className="text-white text-xs ml-2">2:34</div>
-        <button className="mx-2 text-white hover:text-gray-400 transition-colors">
-          50%
-        </button>
       </div>
     </div>
   );

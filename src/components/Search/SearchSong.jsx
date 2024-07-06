@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../HomePage/NavBar";
+import NavBar from "../NavAndSideBar/SideBar";
 import SectionSearch from "./SectionSearch";
 import SongContext from "../../contexts/SongContext";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import SearchByType from "../Search/SearchByType";
 import useApi from "../../hooks/useAPI";
-import UpperBar from "../HomePage/UpperBar";
+import UpperBar from "../NavAndSideBar/NavBar";
 import useLoadingBar from "../../hooks/useLoadingBar";
 const SearchSong = () => {
   const { name } = useParams();
@@ -29,9 +29,6 @@ const SearchSong = () => {
 
   return (
     <>
-      <NavBar />
-      <UpperBar />
-
       {!searchQuery ? (
         <div className="flex min-h-screen flex-col items-center justify-center content-center ">
           <div className="text-7xl text-red-700 p-3">404 Not Found</div>
@@ -85,8 +82,6 @@ const SearchSong = () => {
           )}
         </div>
       )}
-
-      <MusicPlayer />
     </>
   );
 };
