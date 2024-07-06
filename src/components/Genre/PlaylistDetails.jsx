@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SongContext from "../../contexts/SongContext";
-import NavBar from "../HomePage/NavBar";
+import NavBar from "../NavAndSideBar/SideBar";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import useLoadingBar from "../../hooks/useLoadingBar";
 import useApi from "../../hooks/useAPI";
@@ -12,11 +12,9 @@ export const PlaylistDetails = () => {
   const { playlistDetails, setPlaylistDetails } = useContext(SongContext);
 
   const { isLoading } = useApi("/api/playlist", id, setPlaylistDetails);
-  console.log(playlistDetails);
+  // console.log(playlistDetails);
   return (
     <>
-      <NavBar />
-      <MusicPlayer />
       <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">
         {/* Adjusted for flex layout and added margin-left */}
         {isLoading ? (

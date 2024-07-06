@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SongContext from "../../contexts/SongContext";
 
-const UpperBar = () => {
+const NavBar = () => {
   const { searchQuery, setSearchQuery } = useContext(SongContext);
   const navigate = useNavigate();
   const [localSearchQuery, setLocalSearchQuery] = useState("");
@@ -28,7 +28,7 @@ const UpperBar = () => {
           <input
             type="search"
             id="default-search"
-            className="block w-96 p-4 text-white bg-black rounded-lg text-xs     font-base bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent border border-white/20"
+            className="block w-96 p-4 text-white bg-black rounded-lg text-xs     font-base bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent border-2 border-red-700/40"
             placeholder="Search Songs, Albums, Playlists..."
             value={localSearchQuery}
             onChange={(e) => setLocalSearchQuery(e.target.value)}
@@ -60,4 +60,4 @@ const UpperBar = () => {
   );
 };
 
-export default UpperBar;
+export default NavBar;

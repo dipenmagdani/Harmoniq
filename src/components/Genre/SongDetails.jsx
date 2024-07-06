@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from "../HomePage/NavBar";
+import NavBar from "../NavAndSideBar/SideBar";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import SongContext from "../../contexts/SongContext";
 import useApi from "../../hooks/useAPI";
@@ -22,8 +22,6 @@ export const SongDetails = () => {
   console.log(songData);
   return (
     <>
-      <NavBar />
-      <MusicPlayer />
       <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">
         {isLoading ? (
           <div className="flex items-center justify-center w-full h-full transition-all duration-300">
