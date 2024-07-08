@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import SongContext from "../../contexts/SongContext";
-import NavBar from "../NavAndSideBar/SideBar";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
-import useLoadingBar from "../../hooks/useLoadingBar";
-import useApi from "../../hooks/useAPI";
-import CardComponent from "../CardComponent/CardComponent";
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import SongContext from '../../contexts/SongContext';
+
+import useLoadingBar from '../../hooks/useLoadingBar';
+import useApi from '../../hooks/useAPI';
+import CardComponent from '../CardComponent/CardComponent';
+
 export const PlaylistDetails = () => {
   const { id } = useParams();
   const { LoadingBar } = useLoadingBar();
-  const { playlistDetails, setPlaylistDetails } = useContext(SongContext);
+  const { setSongs, songs } = useContext(SongContext);
 
-  const { isLoading } = useApi("/api/playlist", id, setPlaylistDetails);
-  // console.log(playlistDetails);
+  const { isLoading } = useApi('/api/playlist', id, setSongs);
   return (
     <>
       <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">
@@ -22,7 +21,7 @@ export const PlaylistDetails = () => {
             <LoadingBar />
           </div>
         ) : (
-          <CardComponent data={playlistDetails} />
+          <CardComponent data={songs} />
         )}
       </div>
     </>
