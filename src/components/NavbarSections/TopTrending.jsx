@@ -1,6 +1,4 @@
-import React from 'react'
+import React from 'react';
 export const TopTrending = () => {
-    return (
-        <div>This is Top Trending Section</div>
-    )
-}
+  return <div>This is Top Trending Section</div>;
+};

@@ -1,22 +1,19 @@
-import React, { useState, useEffect, useCallback, useContext } from "react";
-import { useParams } from "react-router-dom";
-import NavBar from "../NavAndSideBar/SideBar";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
-import SongContext from "../../contexts/SongContext";
-import useApi from "../../hooks/useAPI";
-import useLoadingBar from "../../hooks/useLoadingBar";
-import CardComponent from "../CardComponent/CardComponent";
+import React, { useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import SongContext from '../../contexts/SongContext';
+import useApi from '../../hooks/useAPI';
+import useLoadingBar from '../../hooks/useLoadingBar';
+import CardComponent from '../CardComponent/CardComponent';
 
 export const SongDetails = () => {
   const { id } = useParams();
   const { songData, setSongData } = useContext(SongContext);
   const { LoadingBar } = useLoadingBar();
 
-  const { isLoading } = useApi("/api/song", id, setSongData);
+  const { isLoading } = useApi('/api/song', id, setSongData);
   useEffect(() => {
     if (songData?.songs) {
-      // Assuming 'results' is the key holding the actual song data
-      setSongData(songData.songs[0]); // Adjust according to your API response structure
+      setSongData(songData.songs[0]);
     }
   }, [songData, setSongData]);
   console.log(songData);
