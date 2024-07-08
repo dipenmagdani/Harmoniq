@@ -8,7 +8,6 @@ const env = loadEnv(process.env.NODE_ENV, process.cwd());
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173,
     proxy: {
       '/api': {
         target: env.VITE_BACKEND_URL,
