@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
 import { HiTrendingUp } from 'react-icons/hi';
 import { FaStream } from 'react-icons/fa';
-import { BiAlbum } from 'react-icons/bi';
+import { BiAlbum, BiLogoGithub } from 'react-icons/bi';
 import { MdPlaylistAddCircle } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SongContext from '../../contexts/SongContext';
@@ -32,7 +32,7 @@ const SideBar = () => {
       <Toaster richColors position="top-center" />
       {/* Hamburger Menu for Small Screens */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 text-white text-3xl"
+        className="lg:hidden fixed top-4 left-4 z-50 text-white text-3xl "
         onClick={toggleSidebar}
       >
         <GiHamburgerMenu />
@@ -41,7 +41,7 @@ const SideBar = () => {
       {/* Sidebar */}
       <div
         className={`${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full no-scrollbar'
         } lg:translate-x-0 transition-transform transform fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 overflow-y-auto lg:w-56 lg:left-3 lg:top-3 lg:border-2 lg:h-[610px] lg:rounded-2xl lg:border-slate-800/80 lg:bg-[#121217] not-scrollbar`}
       >
         <Link to={'/'}>
@@ -134,6 +134,12 @@ const SideBar = () => {
                   </div>
                 </div>
               </button>
+              <div className="flex gap-2 text-xl items-center justify-center">
+                Made By{' '}
+                <a href="https://www.github.com/dipenmagdani">
+                  <BiLogoGithub size={25} />
+                </a>
+              </div>
             </div>
           </div>
         </div>

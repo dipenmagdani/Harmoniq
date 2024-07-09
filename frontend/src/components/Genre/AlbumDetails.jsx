@@ -5,6 +5,7 @@ import SongContext from '../../contexts/SongContext';
 import useApi from '../../hooks/useAPI';
 import useLoadingBar from '../../hooks/useLoadingBar';
 import CardComponent from '../CardComponent/CardComponent';
+import SkeletonCard from '../CardComponent/SkeletonCard';
 
 export const AlbumDetails = () => {
   const { id } = useParams();
@@ -15,8 +16,8 @@ export const AlbumDetails = () => {
     <>
       <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">
         {isLoading ? (
-          <div className="flex items-center justify-center w-full h-full transition-all duration-300">
-            <LoadingBar />
+          <div className="flex items-center justify-center w-full h-full ">
+            <SkeletonCard />
           </div>
         ) : (
           <CardComponent data={songs} />

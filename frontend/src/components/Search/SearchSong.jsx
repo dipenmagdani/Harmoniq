@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import SectionSearch from './SectionSearch';
 import SongContext from '../../contexts/SongContext';
 import useApi from '../../hooks/useAPI';
-import useLoadingBar from '../../hooks/useLoadingBar';
 const SearchSong = () => {
   const { name } = useParams();
   const { searchData, setSearchData } = useContext(SongContext);
@@ -11,7 +10,7 @@ const SearchSong = () => {
 
   return (
     <>
-      <div className="song_data h-72 my-10">
+      <div className="song_data  h-[600px] my-10 overflow-y-auto">
         {searchData?.topQuery?.data?.length > 0 && (
           <SectionSearch
             title={'Top'}

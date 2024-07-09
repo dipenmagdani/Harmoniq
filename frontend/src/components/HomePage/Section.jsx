@@ -7,7 +7,7 @@ const Section = ({ title, data }) => {
 
   return (
     <>
-      <div className="p-4 min-[1024px]:ml-64 mb-10">
+      <div className="p-4 min-[1024px]:ml-64 mb-5">
         <h1 className="pb-2 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
           {isLoading ? (
             <div className="w-32 h-5 bg-zinc-700/30 rounded animate-pulse overflow-hidden">
@@ -27,7 +27,7 @@ const Section = ({ title, data }) => {
           </div>
         </div>
       </div>
-      <div className="min-w-32 min-[1024px]:ml-64 relative top-2 bg-white/40 h-[1.3px]"></div>
+      <div className="min-w-32 min-[1024px]:ml-64 relative bottom-2 bg-white/40 h-[1.3px]"></div>
     </>
   );
 };

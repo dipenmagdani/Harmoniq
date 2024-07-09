@@ -25,7 +25,7 @@ const SearchByType = () => {
 
   return (
     <>
-      <div className="p-4 min-[1024px]:ml-64 mt-12 ">
+      <div className="p-4 min-[1024px]:ml-64 mb-10">
         <h1 className="pb-2 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
           {isLoading ? (
             <div className="w-32 h-5 bg-zinc-700/30 rounded animate-pulse overflow-hidden">
@@ -35,7 +35,7 @@ const SearchByType = () => {
             type.charAt(0).toUpperCase() + type.slice(1)
           )}
         </h1>
-        <div className="overflow-x-auto no-scrollbar flex">
+        <div className="overflow-y-auto no-scrollbar flex h-fit ">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 transition-all ease-in-out duration-1000">
             {searchTypeData?.results?.map((item, index) => (
               <SearchTypeCard key={index} items={item} />

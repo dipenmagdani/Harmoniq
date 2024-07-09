@@ -8,7 +8,6 @@ const CardComponent = ({ data }) => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
-
   const { currentSong, playMusic, isPlaying } = useContext(SongContext);
   return (
     <>
@@ -27,7 +26,7 @@ const CardComponent = ({ data }) => {
                   }
                   alt={data?.name || 'Album cover'}
                   width={275}
-                  className="transition-all duration-300 hover:scale-110 rounded-xl"
+                  className="transition-all duration-300 hover:scale-90 rounded-xl"
                 />
               ) : (
                 <div
@@ -48,14 +47,17 @@ const CardComponent = ({ data }) => {
                     : ''}
                 </h2>
                 <h2 className="mt-2">{data?.copyright_text}</h2>
-                <div className="mt-2 rounded-lg h-12 border-[3px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-40 flex items-center justify-center">
-                  <button
-                    className="text-2xl"
-                    onClick={() => playMusic(data?.songs?.[0])}
-                  >
-                    Play
-                  </button>
-                </div>
+
+                <button
+                  className={`text-2xl mt-2 rounded-lg h-12 border-[3px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-40 flex items-center justify-center transition-all duration-500 ease-in-out ${
+                    isPlaying ? 'bg-black/50 text-white/50' : 'text-red-700/80'
+                  }`}
+                  onClick={() =>
+                    playMusic(data?.type === 'song' ? data : data?.songs[0])
+                  }
+                >
+                  {isPlaying ? 'Pause' : 'Play'}
+                </button>
               </div>
             </div>
           </div>
@@ -69,12 +71,12 @@ const CardComponent = ({ data }) => {
                   key="1"
                   className={`w-full border-2 p-3 space-x-10 border-t-red-700/80 rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
                     currentSong === data && isPlaying
-                      ? 'scale-110 text-white/80 shadow-xl'
+                      ? 'scale-90 text-white/80 shadow-xl'
                       : 'text-white/30'
                   }`}
                 >
                   <div className="w-5 text-xl">{1}</div>
-                  <button>
+                  <button onClick={() => playMusic(data)}>
                     <div className="icon-details cursor-pointer">
                       <div className="text-red-700 bg-black/40 hover:text-white hover:bg-red-800 w-9 h-9 rounded-full flex items-center justify-center">
                         {currentSong === data && isPlaying ? (

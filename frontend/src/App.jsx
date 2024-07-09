@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import HomePage from './components/HomePage/HomePage';
 import HomePage from './components/HomePage/HomePage';
 import { SongProvider } from './contexts/SongContext';
 import { TopTrending } from './components/NavbarSections/TopTrending';
@@ -26,7 +25,6 @@ export const App = () => {
             <Route path="/search/:name" element={<SearchSong />} />
             <Route path="/search/:name/:type" element={<SearchByType />} />
             <Route path="top-trending" element={<TopTrending />} />
-            <Route path="/maincard" element={<SkeletonCard />} />
           </Routes>
         </Layout>
       </BrowserRouter>

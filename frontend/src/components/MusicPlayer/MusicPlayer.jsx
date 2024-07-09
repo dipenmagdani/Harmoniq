@@ -1,5 +1,10 @@
 import React, { useContext } from 'react';
-import { PiPlayLight, PiPauseLight, PiShuffle } from 'react-icons/pi';
+import {
+  PiPlayLight,
+  PiPauseLight,
+  PiShuffle,
+  PiShuffleSimpleBold,
+} from 'react-icons/pi';
 import { BiSolidVolumeFull, BiSolidVolumeMute } from 'react-icons/bi';
 
 import { RxTrackNext, RxTrackPrevious } from 'react-icons/rx';
@@ -90,11 +95,11 @@ const MusicPlayer = () => {
               </button>
               <button onClick={() => shuffleSongs()}>
                 <div
-                  className={`text-2xl cursor-pointer text-white/20 hover:text-white/60 ${
-                    isShuffled ? 'text-red-700' : ''
-                  }  md:block1`}
+                  className={`text-2xl cursor-pointer  hover:text-white/60 ${
+                    isShuffled ? 'text-red-700 ' : 'text-white/20'
+                  }`}
                 >
-                  <PiShuffle />
+                  {isShuffled ? <PiShuffleSimpleBold /> : <PiShuffle />}
                 </div>
               </button>
             </div>
@@ -120,7 +125,7 @@ const MusicPlayer = () => {
             <div className="hidden lg:flex gap-3 items-center">
               <button onClick={() => toggleMute()}>
                 <div className="text-2xl cursor-pointer text-red-700 hover:text-white/60 transition-all duration-400 ease-in-out">
-                  {(currentSong && isPlaying && isMuted) || volume == 0 ? (
+                  {!isMuted || volume == 0 ? (
                     <BiSolidVolumeMute />
                   ) : (
                     <BiSolidVolumeFull />

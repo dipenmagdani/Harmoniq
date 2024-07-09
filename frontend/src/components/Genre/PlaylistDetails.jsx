@@ -5,6 +5,7 @@ import SongContext from '../../contexts/SongContext';
 import useLoadingBar from '../../hooks/useLoadingBar';
 import useApi from '../../hooks/useAPI';
 import CardComponent from '../CardComponent/CardComponent';
+import SkeletonCard from '../CardComponent/SkeletonCard';
 
 export const PlaylistDetails = () => {
   const { id } = useParams();
@@ -18,7 +19,7 @@ export const PlaylistDetails = () => {
         {/* Adjusted for flex layout and added margin-left */}
         {isLoading ? (
           <div className="flex items-center justify-center w-full h-full flex-col">
-            <LoadingBar />
+            <SkeletonCard />
           </div>
         ) : (
           <CardComponent data={songs} />

@@ -1,6 +1,5 @@
 import React from 'react';
 import MusicPlayer from '../MusicPlayer/MusicPlayer';
-// import NavBar from "../NavAndSideBar/NavBar";
 import SideBar from '../NavAndSideBar/SideBar';
 const Layout = ({ children }) => {
   return (

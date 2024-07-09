@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import SongContext from '../../contexts/SongContext';
 import SkeletonCard from '../CardComponent/SkeletonCard';
 import useApi from '../../hooks/useAPI';
-
+import useLoadingBar from '../../hooks/useLoadingBar';
 const SearchSongCard = ({ items }) => {
-  const { isLoading } = useApi(null, null, null);
+  const { isLoading } = useApi();
+  const { LoadingBar } = useLoadingBar();
 
   const type = items.type;
   const generateLink = () => {
@@ -28,9 +28,8 @@ const SearchSongCard = ({ items }) => {
       </div>
     );
   }
-
   return (
-    <Link to={generateLink()} className="block w-full ">
+    <Link to={generateLink()} className="block w-full">
       <div className="w-40 h-40 sm:w-52 sm:h-52 border-2 p-2 rounded-md border-white/35 hover:border-white/60 transition-all duration-300 bg-stone-700/20 ease-in-out">
         <div className="relative w-full h-full cursor-pointer group">
           <img
