@@ -7,12 +7,7 @@ const PORT = process.env.PORT || 5000;
 const { API_URL } = process.env;
 const app = express();
 
-const corsOptions = {
-  origin: "https://harmoniq-theta.vercel.app", // replace with your Vercel app URL
-  optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 const handleApiRequest = async (req, res, endpoint) => {
