@@ -11,11 +11,12 @@ const useApi = (endpoint, id, setData) => {
       }
 
       try {
-        let url = endpoint;
+        let url = import.meta.env.VITE_API_URL + endpoint;
+        console.log(url);
 
         if (id) {
           const cleanId = id.replace(/=$/, '');
-          url = `${endpoint}/${cleanId}`;
+          url = `${import.meta.env.VITE_API_URL}/${endpoint}/${cleanId}`;
         }
 
         const response = await fetch(url);
