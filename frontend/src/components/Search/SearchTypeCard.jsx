@@ -7,7 +7,7 @@ const SearchTypeCard = ({ items }) => {
   const { isLoading } = useApi(null, null, null);
 
   const type = items.type;
-
+  console.log(items);
   const generateLink = () => {
     switch (type) {
       case 'playlist':

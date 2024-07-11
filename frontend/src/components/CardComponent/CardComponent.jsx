@@ -8,11 +8,12 @@ const CardComponent = ({ data }) => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
-  const { currentSong, playMusic, isPlaying } = useContext(SongContext);
+  const { currentSong, playMusic, isPlaying, isFullScreen, songs } =
+    useContext(SongContext);
   return (
     <>
-      <div className="main-content p-2">
-        <div className="flex flex-col items-center w-full">
+      <div className="main-content p-10 relative right-24 ">
+        <div className={` flex flex-col   w-full`}>
           <div className="upper-part p-5 max-w-4xl">
             <div className="header flex gap-7">
               {data?.image?.[2]?.link ? (
@@ -50,13 +51,15 @@ const CardComponent = ({ data }) => {
 
                 <button
                   className={`text-2xl mt-2 rounded-lg h-12 border-[3px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-40 flex items-center justify-center transition-all duration-500 ease-in-out ${
-                    isPlaying ? 'bg-black/50 text-white/50' : 'text-red-700/80'
+                    isPlaying && currentSong?.id
+                      ? 'bg-black/50 text-white/50'
+                      : 'text-red-700/80'
                   }`}
                   onClick={() =>
                     playMusic(data?.type === 'song' ? data : data?.songs[0])
                   }
                 >
-                  {isPlaying ? 'Pause' : 'Play'}
+                  {isPlaying && currentSong?.id ? 'Pause' : 'Play'}
                 </button>
               </div>
             </div>
@@ -65,12 +68,12 @@ const CardComponent = ({ data }) => {
             className="songs-list  bg-black/20 rounded-xl p-5"
             style={{ marginBottom: '100px' }}
           >
-            <div className="overflow-y-auto max-h-[500px] transition-all duration-500 ease-in-out">
+            <div className="overflow-y-auto max-h-[500px] transition-all duration-500 ease-in-out w-[1000px]">
               {data?.type === 'song' ? (
                 <div
                   key="1"
                   className={`w-full border-2 p-3 space-x-10 border-t-red-700/80 rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
-                    currentSong === data && isPlaying
+                    currentSong?.id === data?.id && isPlaying
                       ? 'scale-90 text-white/80 shadow-xl'
                       : 'text-white/30'
                   }`}
@@ -79,7 +82,7 @@ const CardComponent = ({ data }) => {
                   <button onClick={() => playMusic(data)}>
                     <div className="icon-details cursor-pointer">
                       <div className="text-red-700 bg-black/40 hover:text-white hover:bg-red-800 w-9 h-9 rounded-full flex items-center justify-center">
-                        {currentSong === data && isPlaying ? (
+                        {currentSong?.id === data?.id && isPlaying ? (
                           <PiWaveformBold size={20} />
                         ) : (
                           <PiPlayFill size={20} />
@@ -102,13 +105,13 @@ const CardComponent = ({ data }) => {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col space-y-5 z-40 transition-all duration-500 ease-in-out">
+                <div className="flex flex-col space-y-5 z-40 transition-all duration-500 ease-in-out ">
                   {data?.songs?.map((song, index) => (
                     <div
                       key={index}
-                      className={`w-full border-2 p-3  space-x-10 border-t-red-700/80 rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
-                        currentSong === song && isPlaying
-                          ? 'scale-90  text-white/80 shadow-xl'
+                      className={` border-2 p-3  space-x-10 border-t-red-700/80 rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
+                        currentSong?.id === song?.id && isPlaying
+                          ? 'scale-90 text-white/80 shadow-xl'
                           : 'text-white/30'
                       }`}
                     >
@@ -116,7 +119,7 @@ const CardComponent = ({ data }) => {
                       <button onClick={() => playMusic(song)}>
                         <div className="icon-details cursor-pointer">
                           <div className="text-red-700 bg-black/40 hover:text-white hover:bg-red-800 w-9 h-9 rounded-full flex items-center justify-center">
-                            {currentSong === song && isPlaying ? (
+                            {isPlaying && currentSong?.id === song?.id ? (
                               <PiWaveformBold size={20} />
                             ) : (
                               <PiPlayFill size={20} />

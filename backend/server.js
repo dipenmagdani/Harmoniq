@@ -26,8 +26,8 @@ app.get("/api", (req, res) => {
   res.json("Hello");
 });
 
-app.get("/api/home", (req, res) =>
-  handleApiRequest(req, res, "/modules?lang=hindi")
+app.get("/api/home/:lang", (req, res) =>
+  handleApiRequest(req, res, `/modules?lang=${req.params.lang}`)
 );
 app.get("/api/album/:id", (req, res) =>
   handleApiRequest(req, res, `/album?id=${req.params.id}`)

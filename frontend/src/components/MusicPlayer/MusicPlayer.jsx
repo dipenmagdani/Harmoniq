@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   PiPlayLight,
   PiPauseLight,
@@ -6,14 +6,16 @@ import {
   PiShuffleSimpleBold,
 } from 'react-icons/pi';
 import { BiSolidVolumeFull, BiSolidVolumeMute } from 'react-icons/bi';
-
+import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { RxTrackNext, RxTrackPrevious } from 'react-icons/rx';
 import SongContext from '../../contexts/SongContext';
+import { useNavigate } from 'react-router-dom';
 
 const MusicPlayer = () => {
   const {
     playMusic,
     currentSong,
+    setCurrentSong,
     isPlaying,
     nextSong,
     prevSong,
@@ -27,7 +29,13 @@ const MusicPlayer = () => {
     audioRef,
     volume,
     handleVolumeChange,
+    songs,
+    isFullScreen,
+    setIsFullScreen,
+    setCurrentTime,
   } = useContext(SongContext);
+  const navigate = useNavigate();
+
   const handleSeek = (event) => {
     const newTime = (event.target.value / 100) * duration;
     audioRef.current.currentTime = newTime;
@@ -39,6 +47,20 @@ const MusicPlayer = () => {
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
+  const toggleFullScreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+      setIsFullScreen(!isFullScreen);
+    } else {
+      document.documentElement.requestFullscreen();
+      navigate(
+        `${currentSong?.origin === 'none' ? 'song' : songs?.type}/${
+          currentSong?.origin === 'none' ? currentSong?.id : songs?.id
+        }`
+      );
+    }
+    setIsFullScreen(!isFullScreen);
+  };
   return (
     <>
       <div
@@ -81,11 +103,7 @@ const MusicPlayer = () => {
               </button>
               <button onClick={() => currentSong && playMusic(currentSong)}>
                 <div className="text-2xl rounded-full bg-red-700 hover:bg-red-500/60 w-10 h-10 flex items-center justify-center cursor-pointer">
-                  {isPlaying && currentSong ? (
-                    <PiPauseLight />
-                  ) : (
-                    <PiPlayLight />
-                  )}
+                  {isPlaying ? <PiPauseLight /> : <PiPlayLight />}
                 </div>
               </button>
               <button onClick={() => nextSong()}>
@@ -114,7 +132,7 @@ const MusicPlayer = () => {
                   min={0}
                   max={100}
                   step="0.1"
-                  value={(currentTime / duration) * 100 || 0}
+                  value={((currentTime / duration) * 100).toString()}
                   onChange={handleSeek}
                 />
                 <span className="text-white text-sm">
@@ -122,13 +140,22 @@ const MusicPlayer = () => {
                 </span>
               </div>
             </div>
+            <button onClick={() => toggleFullScreen()}>
+              <div className="full-screen cursor-pointer text-red-700 hover:text-white/50">
+                {!isFullScreen ? (
+                  <AiOutlineFullscreen size={25} />
+                ) : (
+                  <AiOutlineFullscreenExit size={25} />
+                )}
+              </div>
+            </button>
             <div className="hidden lg:flex gap-3 items-center">
               <button onClick={() => toggleMute()}>
                 <div className="text-2xl cursor-pointer text-red-700 hover:text-white/60 transition-all duration-400 ease-in-out">
-                  {!isMuted || volume == 0 ? (
-                    <BiSolidVolumeMute />
-                  ) : (
+                  {isMuted || volume == 0 ? (
                     <BiSolidVolumeFull />
+                  ) : (
+                    <BiSolidVolumeMute />
                   )}
                 </div>
               </button>

@@ -2,10 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useApi from '../../hooks/useAPI';
 import SkeletonCard from '../CardComponent/SkeletonCard';
-
+import useLoadingBar from '../../hooks/useLoadingBar';
+import { useEffect } from 'react';
 const SongCard = ({ items }) => {
-  const { isLoading } = useApi();
+  const { isLoading, setIsLoading } = useApi();
+  const { LoadingBar } = useLoadingBar();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
+    return () => clearTimeout(timer);
+  }, []);
   const generateLink = () => {
     switch (items?.type) {
       case 'playlist':

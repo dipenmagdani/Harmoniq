@@ -32,10 +32,12 @@ const useApi = (endpoint, id, setData) => {
       }
     };
 
-    fetchData();
+    setTimeout(() => {
+      fetchData();
+    }, 500);
   }, [endpoint, id, setData]);
 
-  return { isLoading };
+  return { isLoading, setIsLoading };
 };
 
 export default useApi;

@@ -20,11 +20,25 @@ export const SongProvider = (props) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [localMusic, setLocalMusic] = useState(null);
 
   const audioRef = useRef(new Audio());
 
   <Toaster richColors position="top-left" />;
-
+  // console.log(localMusic);
+  useEffect(() => {
+    const audio = audioRef.current;
+    const savedSong = JSON.parse(localStorage.getItem('currentSong'));
+    if (savedSong) {
+      setCurrentSong(savedSong);
+      audio.src = savedSong.download_url[4].link;
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(!isPlaying);
+      }
+    }
+  }, []);
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -65,7 +79,7 @@ export const SongProvider = (props) => {
         audio.pause();
         setIsPlaying(false);
       } else {
-        audio.play().catch((error) => {
+        await audio.play().catch((error) => {
           console.error('Failed to play audio:', error);
         });
         setIsPlaying(true);
@@ -75,6 +89,8 @@ export const SongProvider = (props) => {
       audio.src = song.download_url[4].link;
       setCurrentSong(song);
       setIsPlaying(true);
+      localStorage.setItem('currentSong', JSON.stringify(song));
+
       await audio.play().catch((error) => {
         console.error('Failed to play audio:', error);
       });
@@ -124,8 +140,10 @@ export const SongProvider = (props) => {
   };
 
   const toggleMute = () => {
-    setIsMuted(!isMuted);
-    audioRef.current.muted = !isMuted;
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
+      setIsMuted(!isMuted);
+    }
   };
 
   const repeatSong = () => {
@@ -193,6 +211,8 @@ export const SongProvider = (props) => {
         volume,
         setVolume,
         handleVolumeChange,
+        isFullScreen,
+        setIsFullScreen,
       }}
     >
       {props.children}
