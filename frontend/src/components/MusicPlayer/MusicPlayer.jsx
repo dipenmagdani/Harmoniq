@@ -47,20 +47,22 @@ const MusicPlayer = () => {
     return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
   };
 
-  const toggleFullScreen = () => {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-      setIsFullScreen(!isFullScreen);
-    } else {
-      document.documentElement.requestFullscreen();
-      navigate(
-        `${currentSong?.origin === 'none' ? 'song' : songs?.type}/${
-          currentSong?.origin === 'none' ? currentSong?.id : songs?.id
-        }`
-      );
-    }
-    setIsFullScreen(!isFullScreen);
-  };
+  // const toggleFullScreen = () => {
+  //   if (isPlaying) {
+  //     if (document.fullscreenElement) {
+  //       document.exitFullscreen();
+  //       setIsFullScreen(!isFullScreen);
+  //     } else {
+  //       document.documentElement.requestFullscreen();
+  //       navigate(
+  //         `${currentSong?.origin === 'none' ? 'song' : songs?.type}/${
+  //           currentSong?.origin === 'none' ? currentSong?.id : songs?.id
+  //         }`
+  //       );
+  //     }
+  //   }
+  //   setIsFullScreen(!isFullScreen);
+  // };
   return (
     <>
       <div
@@ -71,11 +73,11 @@ const MusicPlayer = () => {
         <div className="w-full h-[70px] transition-all duration-500 rounded-t-xl">
           <div className="playback-details flex justify-between items-center h-full px-4">
             <div className="song-details flex gap-3 items-center">
-              <div className="bg-gray-50 w-16 h-12 min-[2400px]:w-12 max-[450px]:w-12 rounded-full shadow-glow shadow-zinc-700 border border-zinc-500">
+              <div className="bg-gray-50 w-16 min-[2400px]:w-12 max-[450px]:w-12 rounded-full shadow-glow shadow-zinc-700 border border-zinc-500">
                 <img
                   src={currentSong?.image?.[2]?.link}
                   alt=""
-                  className="w-16 h-12 rounded-full min-[2400px]:w-12 max-[450px]:w-12"
+                  className="w-14 rounded-full min-[2400px]:w-12 max-[450px]:w-12"
                 />
               </div>
               <div className="track-details space-y-1 md:w-full">
@@ -140,7 +142,7 @@ const MusicPlayer = () => {
                 </span>
               </div>
             </div>
-            <button onClick={() => toggleFullScreen()}>
+            {/* <button onClick={() => toggleFullScreen()}>
               <div className="full-screen cursor-pointer text-red-700 hover:text-white/50">
                 {!isFullScreen ? (
                   <AiOutlineFullscreen size={25} />
@@ -148,7 +150,7 @@ const MusicPlayer = () => {
                   <AiOutlineFullscreenExit size={25} />
                 )}
               </div>
-            </button>
+            </button> */}
             <div className="hidden lg:flex gap-3 items-center">
               <button onClick={() => toggleMute()}>
                 <div className="text-2xl cursor-pointer text-red-700 hover:text-white/60 transition-all duration-400 ease-in-out">

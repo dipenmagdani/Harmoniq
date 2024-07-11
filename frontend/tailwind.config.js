@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         redHat: ['Red Hat Display', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
+        urbanist: ['urbanist', 'sans-serif'],
       },
       boxShadow: {
         glow: '0 0 15px rgba(255, 105, 180, 0.8)',

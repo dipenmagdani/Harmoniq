@@ -9,7 +9,7 @@ const HomePage = () => {
   const [isGenreLoading, setIsGenreLoading] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(null);
   const genres = [
-    { name: 'classical', value: 'classical' },
+    { name: 'All', value: 'all' },
     { name: 'Hindi', value: 'hindi' },
     { name: 'English', value: 'english' },
     { name: 'Tamil', value: 'tamil' },
@@ -26,7 +26,7 @@ const HomePage = () => {
     { name: 'Haryanvi', value: 'haryanvi' },
   ];
 
-  const { isLoading } = useApi('/api/search/playlist', genre, setSongDetails);
+  const { isLoading } = useApi('/api/home', genre, setSongDetails);
   const handleGenreChange = (newGenre) => {
     setGenre(newGenre);
     setSelectedGenre(newGenre);
@@ -36,9 +36,6 @@ const HomePage = () => {
       setIsGenreLoading(false);
     }, 500);
   };
-  console.log(genre);
-  console.log(songDetails);
-
   const {
     trending,
     albums,
@@ -64,7 +61,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="song_data mx-3 my-10 ">
+      <div className="song_data mx-3 my-3 pb-9 ">
         <div className="song_data ">
           <div className="flex md:ml-72 p-3 gap-4 overflow-x-auto no-scrollbar text-nowrap relative right-5">
             {genres?.map((genre) => {
@@ -72,10 +69,10 @@ const HomePage = () => {
                 <button
                   key={genre.value}
                   onClick={() => handleGenreChange(genre.value)}
-                  className={`grid grid-rows-2 grid-flow-col-dense p-3 rounded-md h-7 border-[3px] text-[14px] text-red-600/80 bg-slate-800/30   hover:text-black hover:bg-red-900 cursor-pointer  w-32 items-center justify-center ${
+                  className={`grid grid-rows-2 grid-flow-col-dense p-3 rounded-md h-7 border-2 border-zinc-700 text-[14px] text-zinc-400 bg-slate-800/30 hover:text-zinc-300 hover:bg-zinc-700/80 hover:border-zinc-200/40 hover:shadow-glow hover:shadow-black cursor-pointer w-32 items-center justify-center ${
                     selectedGenre === genre.value
-                      ? 'bg-white text-red-800 border-2 border-black'
-                      : 'text-white bg-black '
+                      ? 'bg-zinc-600 text-zinc-300 border-2 border-black'
+                      : 'text-white  bg-black '
                   }`}
                 >
                   {genre.name}
@@ -89,8 +86,8 @@ const HomePage = () => {
             </div>
           ) : (
             <>
-              {songDetails?.results?.length > 0 && (
-                <Section title={genre} data={songDetails.results} />
+              {trending?.data?.length > 0 && (
+                <Section title={trending.title} data={trending.data} />
               )}
               {albums?.data?.length > 0 && (
                 <Section title={albums.title} data={albums.data} />

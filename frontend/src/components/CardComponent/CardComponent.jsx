@@ -12,8 +12,8 @@ const CardComponent = ({ data }) => {
     useContext(SongContext);
   return (
     <>
-      <div className="main-content p-10 relative right-24 ">
-        <div className={` flex flex-col   w-full`}>
+      <div className="main-content relative right-14 mb-28 ">
+        <div className={` flex flex-col  w-full`}>
           <div className="upper-part p-5 max-w-4xl">
             <div className="header flex gap-7">
               {data?.image?.[2]?.link ? (
@@ -50,7 +50,7 @@ const CardComponent = ({ data }) => {
                 <h2 className="mt-2">{data?.copyright_text}</h2>
 
                 <button
-                  className={`text-2xl mt-2 rounded-lg h-12 border-[3px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-40 flex items-center justify-center transition-all duration-500 ease-in-out ${
+                  className={`text-xl mt-2 rounded-lg h-12 border-[3px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-24 flex items-center justify-center transition-all duration-500 ease-in-out ${
                     isPlaying && currentSong?.id
                       ? 'bg-black/50 text-white/50'
                       : 'text-red-700/80'
@@ -59,22 +59,22 @@ const CardComponent = ({ data }) => {
                     playMusic(data?.type === 'song' ? data : data?.songs[0])
                   }
                 >
-                  {isPlaying && currentSong?.id ? 'Pause' : 'Play'}
+                  {isPlaying ? 'Pause' : 'Play'}
                 </button>
               </div>
             </div>
           </div>
           <div
-            className="songs-list  bg-black/20 rounded-xl p-5"
+            className="songs-list bg-black/20 rounded-xl p-5 border-2 border-zinc-800/80"
             style={{ marginBottom: '100px' }}
           >
-            <div className="overflow-y-auto max-h-[500px] transition-all duration-500 ease-in-out w-[1000px]">
+            <div className="overflow-y-auto max-h-[500px] transition-all duration-500 ease-in-out w-[850px] p-3 flex text-center justify-center">
               {data?.type === 'song' ? (
                 <div
                   key="1"
-                  className={`w-full border-2 p-3 space-x-10 border-t-red-700/80 rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
+                  className={`w-[650px] border-2 p-3 space-x-10 border-t-red-700/80  rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
                     currentSong?.id === data?.id && isPlaying
-                      ? 'scale-90 text-white/80 shadow-xl'
+                      ? 'scale-110 text-white/80 shadow-xl'
                       : 'text-white/30'
                   }`}
                 >
@@ -83,7 +83,7 @@ const CardComponent = ({ data }) => {
                     <div className="icon-details cursor-pointer">
                       <div className="text-red-700 bg-black/40 hover:text-white hover:bg-red-800 w-9 h-9 rounded-full flex items-center justify-center">
                         {currentSong?.id === data?.id && isPlaying ? (
-                          <PiWaveformBold size={20} />
+                          <PiWaveformBold size={20} className="animate-pulse" />
                         ) : (
                           <PiPlayFill size={20} />
                         )}
@@ -105,13 +105,13 @@ const CardComponent = ({ data }) => {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col space-y-5 z-40 transition-all duration-500 ease-in-out ">
+                <div className="flex flex-col space-y-3 z-40 transition-all duration-500 ease-in-out h-[650px]pt-4">
                   {data?.songs?.map((song, index) => (
                     <div
                       key={index}
-                      className={` border-2 p-3  space-x-10 border-t-red-700/80 rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
+                      className={` border-2 p-3 space-x-10 border-t-red-700/80 w-[700px] rounded-xl border-zinc-800/50 flex items-center bg-black/20 transition-all duration-500 ease-in-out ${
                         currentSong?.id === song?.id && isPlaying
-                          ? 'scale-90 text-white/80 shadow-xl'
+                          ? 'scale-110 text-white/80 shadow-glow shadow-black'
                           : 'text-white/30'
                       }`}
                     >
@@ -120,7 +120,10 @@ const CardComponent = ({ data }) => {
                         <div className="icon-details cursor-pointer">
                           <div className="text-red-700 bg-black/40 hover:text-white hover:bg-red-800 w-9 h-9 rounded-full flex items-center justify-center">
                             {isPlaying && currentSong?.id === song?.id ? (
-                              <PiWaveformBold size={20} />
+                              <PiWaveformBold
+                                size={20}
+                                className="animate-pulse"
+                              />
                             ) : (
                               <PiPlayFill size={20} />
                             )}

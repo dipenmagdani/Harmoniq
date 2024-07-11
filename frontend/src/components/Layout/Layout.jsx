@@ -3,11 +3,12 @@ import MusicPlayer from '../MusicPlayer/MusicPlayer';
 import SideBar from '../NavAndSideBar/SideBar';
 import { useContext } from 'react';
 import SongContext from '../../contexts/SongContext';
+import NavBar from '../NavAndSideBar/NavBar';
 const Layout = ({ children }) => {
   const { isFullScreen } = useContext(SongContext);
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       {!isFullScreen ? <SideBar /> : null}
       <div className="main-content">{children}</div>
       <MusicPlayer />

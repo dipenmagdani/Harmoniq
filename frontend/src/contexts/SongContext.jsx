@@ -25,6 +25,11 @@ export const SongProvider = (props) => {
 
   const audioRef = useRef(new Audio());
 
+  if (currentSong && isPlaying) {
+    document.title = ` ${currentSong?.name}`;
+  }
+  document.title = 'Harmoniq - Discover The Beat';
+
   <Toaster richColors position="top-left" />;
   // console.log(localMusic);
   useEffect(() => {

@@ -8,6 +8,7 @@ import { BiAlbum, BiLogoGithub } from 'react-icons/bi';
 import { MdPlaylistAddCircle } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SongContext from '../../contexts/SongContext';
+import { PiPlaylistDuotone } from 'react-icons/pi';
 
 const SideBar = () => {
   const { setSearchQuery } = useContext(SongContext);
@@ -42,7 +43,7 @@ const SideBar = () => {
       <div
         className={`${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full no-scrollbar'
-        } lg:translate-x-0 transition-transform transform fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 overflow-y-auto lg:w-56 lg:left-3 lg:top-3 lg:border-2 lg:h-[610px] lg:rounded-2xl lg:border-slate-800/80 lg:bg-[#121217] not-scrollbar`}
+        } lg:translate-x-0 transition-transform transform fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 overflow-y-auto lg:w-56 lg:left-3 lg:top-3 lg:border-2 lg:h-[610px] lg:rounded-2xl lg:border-zinc-700/80 lg:bg-[#121217] not-scrollbar`}
       >
         <Link to={'/'}>
           <div className="logo cursor-pointer flex justify-center h-fit p-4 lg:p-0">
@@ -50,49 +51,12 @@ const SideBar = () => {
           </div>
         </Link>
         <div className="main-section flex flex-col gap-3 p-4 lg:p-0">
-          <div className="flex justify-center items-center ">
-            <form className="flex justify-center" onSubmit={handleSearchSubmit}>
-              <label htmlFor="default-search" className="sr-only">
-                Search
-              </label>
-              <div className="flex items-center justify-center ">
-                <input
-                  type="search"
-                  id="default-search"
-                  className="w-36 p-3 text-white bg-black rounded-lg text-sm font-base bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent border-2 border-red-700/40"
-                  placeholder="Search Songs.."
-                  value={localSearchQuery}
-                  onChange={(e) => setLocalSearchQuery(e.target.value)}
-                  required
-                />
-                <button
-                  type="submit"
-                  className="ml-2 text-white rounded-full relative right-1 text-sm border border-white/20 font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent bg-blue-700 hover:bg-blue-800 px-4 py-2 hover:border-white/50 hover:text-white"
-                >
-                  <svg
-                    className="w-4 h-4 text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </form>
-          </div>
+          <div className="flex justify-center items-center "></div>
           <div className="section-list">
             <div className="title flex text-white/50">
               <h1>Recommended</h1>
             </div>
-            <div className="gap-3 font-md text-lg py-3 space-y-4">
+            <div className="gap-3 font-md text-lg py-3 space-y-4 text-zinc-300">
               <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
                 <div className="text-2xl">
                   <HiTrendingUp />
@@ -119,25 +83,25 @@ const SideBar = () => {
               </div>
             </div>
           </div>
-          <div className="section-list space-y-3">
+          <div className="section-list space-y-1">
             <div className="title flex text-white/50">
               <h1>Your Playlist</h1>
             </div>
             <div className="gap-3 font-md text-lg relative left-3 space-y-3 rounded-xl h-44 overflow-y-auto no-scrollbar">
               <button onClick={() => toast.warning('Coming Soon!')}>
-                <div className="flex gap-1 rounded-lg h-12 border-[3px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-40 overflow-x-auto no-scrollbar text-nowrap">
+                <div className="flex gap-1 relative top-3 rounded-lg h-12 border-[2px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-36 overflow-x-auto no-scrollbar text-nowrap">
                   <div className="flex gap-2 mx-2">
-                    <div className="text-2xl">
-                      <MdPlaylistAddCircle />
+                    <div className="text-xl">
+                      <PiPlaylistDuotone />
                     </div>
-                    <h1>New Playlist</h1>
+                    <h1 className="text-sm">New Playlist</h1>
                   </div>
                 </div>
               </button>
-              <div className="flex gap-2 text-xl items-center justify-center">
-                Made By{' '}
+              <div className="flex gap-2 text-sm text-zinc-500 items-center justify-center pt-5">
+                Made By
                 <a href="https://www.github.com/dipenmagdani">
-                  <BiLogoGithub size={25} />
+                  <BiLogoGithub size={25} className="hover:text-zinc-300" />
                 </a>
               </div>
             </div>
