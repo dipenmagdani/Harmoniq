@@ -25,7 +25,7 @@ const SearchByType = () => {
 
   return (
     <>
-      <div className="p-4 min-[1024px]:ml-64 mb-10">
+      <div className="p-4 mb-14 lg:ml-60  ">
         <h1 className="pb-2 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
           {isLoading ? (
             <div className="w-32 h-5 bg-zinc-700/30 rounded animate-pulse overflow-hidden">

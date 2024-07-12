@@ -13,7 +13,7 @@ const SectionSearch = ({ title, data, viewAllLink }) => {
         <div className="top-text flex justify-between">
           <h1 className="pb-2 text-3xl font-bold bg-gradient-to-r from-slate-300/80 to-white/70 bg-clip-text text-transparent">
             {isLoading ? (
-              <div className="w-44 h-5 bg-zinc-700/30  relative top-5 rounded animate-pulse overflow-hidden">
+              <div className="w-44 h-5 bg-zinc-700/30  relative rounded animate-pulse overflow-hidden">
                 <div className="w-44 h-full  bg-gradient-to-r from-zinc-700 to-zinc-600 animate-wave"></div>
               </div>
             ) : (

@@ -15,8 +15,9 @@ export const AlbumDetails = () => {
   return (
     <>
       <div className="main-container flex items-center justify-center pt-2 ml-64 min-h-screen">
+        {/* Adjusted for flex layout and added margin-left */}
         {isLoading ? (
-          <div className="flex items-center justify-center w-full h-full ">
+          <div className="flex items-center justify-center w-full h-full relative bottom-24 flex-col">
             <SkeletonCard />
           </div>
         ) : (

@@ -10,7 +10,7 @@ const SearchSong = () => {
 
   return (
     <>
-      <div className="song_data  h-[600px] my-10 overflow-y-auto">
+      <div className="song_data lg:mb-20">
         {searchData?.topQuery?.data?.length > 0 && (
           <SectionSearch
             title={'Top'}

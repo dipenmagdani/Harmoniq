@@ -34,7 +34,7 @@ const HomePage = () => {
     // Simulate API call delay
     setTimeout(() => {
       setIsGenreLoading(false);
-    }, 500);
+    }, 1200);
   };
   const {
     trending,
@@ -61,83 +61,54 @@ const HomePage = () => {
 
   return (
     <>
-      <div className="song_data mx-3 my-3 pb-9 ">
-        <div className="song_data ">
-          <div className="flex md:ml-72 p-3 gap-4 overflow-x-auto no-scrollbar text-nowrap relative right-5">
-            {genres?.map((genre) => {
-              return (
-                <button
-                  key={genre.value}
-                  onClick={() => handleGenreChange(genre.value)}
-                  className={`grid grid-rows-2 grid-flow-col-dense p-3 rounded-md h-7 border-2 border-zinc-700 text-[14px] text-zinc-400 bg-slate-800/30 hover:text-zinc-300 hover:bg-zinc-700/80 hover:border-zinc-200/40 hover:shadow-glow hover:shadow-black cursor-pointer w-32 items-center justify-center ${
-                    selectedGenre === genre.value
-                      ? 'bg-zinc-600 text-zinc-300 border-2 border-black'
-                      : 'text-white  bg-black '
-                  }`}
-                >
-                  {genre.name}
-                </button>
-              );
-            })}
+      <div className="song_data mx-2 sm:mx-3 my-2 sm:my-3 pb-4 sm:pb-9">
+        <div className="song_data">
+          <div className="flex md:ml-16 lg:ml-72 p-2 sm:p-3 gap-2 sm:gap-4 overflow-x-auto  text-nowrap">
+            {genres?.map((genre) => (
+              <button
+                key={genre.value}
+                onClick={() => handleGenreChange(genre.value)}
+                className={`p-2 sm:p-3 rounded-md text-xs sm:text-sm border border-zinc-700 text-zinc-400 bg-slate-800/30 hover:text-zinc-300 hover:bg-zinc-700/80 hover:border-zinc-200/40 hover:shadow-glow hover:shadow-black cursor-pointer whitespace-nowrap ${
+                  selectedGenre === genre.value
+                    ? 'bg-zinc-600 text-zinc-300 border-2 border-black'
+                    : 'text-white bg-black'
+                }`}
+              >
+                {genre.name}
+              </button>
+            ))}
           </div>
           {isGenreLoading ? (
             <div className="main-card w-40 h-40 sm:w-52 sm:h-52 overflow-hidden border-2 p-2 rounded-md border-white/35">
               <SkeletonCard />
             </div>
           ) : (
-            <>
-              {trending?.data?.length > 0 && (
-                <Section title={trending.title} data={trending.data} />
+            <div className="space-y-4 sm:space-y-6 md:space-y-8">
+              {[
+                trending,
+                albums,
+                charts,
+                playlists,
+                promo0,
+                promo1,
+                promo2,
+                promo3,
+                promo5,
+                promo6,
+                promo7,
+                promo9,
+                promo10,
+              ].map(
+                (section, index) =>
+                  section?.data?.length > 0 && (
+                    <Section
+                      key={index}
+                      title={section.title.slice(0, 20)}
+                      data={section.data}
+                    />
+                  )
               )}
-              {albums?.data?.length > 0 && (
-                <Section title={albums.title} data={albums.data} />
-              )}
-              {charts?.data?.length > 0 && (
-                <Section title={charts.title} data={charts.data} />
-              )}
-              {playlists?.data?.length > 0 && (
-                <Section title={playlists.title} data={playlists.data} />
-              )}
-
-              {/* <Section title={city.title.slice(0, 20)} data={city.data} /> */}
-
-              {promo0?.data?.length > 0 && (
-                <Section title={promo0.title.slice(0, 20)} data={promo0.data} />
-              )}
-              {promo1?.data?.length > 0 && (
-                <Section title={promo1.title.slice(0, 20)} data={promo1.data} />
-              )}
-              {promo2?.data?.length > 0 && (
-                <Section title={promo2.title.slice(0, 20)} data={promo2.data} />
-              )}
-              {promo3?.data?.length > 0 && (
-                <Section title={promo3.title.slice(0, 20)} data={promo3.data} />
-              )}
-              {/* {promo4?.data?.length > 0 && (
-              <Section title={promo4.title.slice(0, 20)} data={promo4.data} />
-            )} */}
-              {promo5?.data?.length > 0 && (
-                <Section title={promo5.title.slice(0, 20)} data={promo5.data} />
-              )}
-              {/* {promo8?.data?.length > 0 && (
-              <Section title={promo8.title.slice(0, 20)} data={promo8.data} />
-            )} */}
-              {promo6?.data?.length > 0 && (
-                <Section title={promo6.title.slice(0, 20)} data={promo6.data} />
-              )}
-              {promo7?.data?.length > 0 && (
-                <Section title={promo7.title.slice(0, 20)} data={promo7.data} />
-              )}
-              {promo9?.data?.length > 0 && (
-                <Section title={promo9.title.slice(0, 20)} data={promo9.data} />
-              )}
-              {promo10?.data?.length > 0 && (
-                <Section
-                  title={promo10.title.slice(0, 20)}
-                  data={promo10.data}
-                />
-              )}
-            </>
+            </div>
           )}
         </div>
       </div>

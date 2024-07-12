@@ -3,7 +3,7 @@ import React from 'react';
 const SkeletonCard = () => {
   return (
     <>
-      <div className="border-2 p-2 rounded-md w-48 h-48 border-zinc-700/35 hover:border-white/60 transition-all duration-1000 ease-in-out animate-pulse">
+      <div className="border-2 p-2 rounded-md max-sm:mr-64 max-sm:mb-40  w-48 h-48 border-zinc-700/35 hover:border-white/60 transition-all duration-1000 ease-in-out animate-pulse">
         <div className="relative max-w-sm rounded-tl-3xl rounded-br-3xl w-auto h-52 cursor-pointer group">
           <div className="w-full h-full rounded-tl-3xl rounded-br-3xl animate-pulse overflow-hidden">
             <div className="w-full animate-wave"></div>

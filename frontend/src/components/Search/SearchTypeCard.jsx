@@ -29,7 +29,7 @@ const SearchTypeCard = ({ items }) => {
     );
   }
   return (
-    <Link to={generateLink()} className="block w-full">
+    <Link to={generateLink()} className="block w-full ">
       <div className="border-2 p-2 rounded-md border-white/35 hover:border-white/60 transition-all duration-500 bg-stone-700/20">
         <div className="relative w-full  h-52 sm:h-64 cursor-pointer group">
           <img

@@ -73,14 +73,14 @@ const MusicPlayer = () => {
         <div className="w-full h-[70px] transition-all duration-500 rounded-t-xl">
           <div className="playback-details flex justify-between items-center h-full px-4">
             <div className="song-details flex gap-3 items-center">
-              <div className="bg-gray-50 w-16 min-[2400px]:w-12 max-[450px]:w-12 rounded-full shadow-glow shadow-zinc-700 border border-zinc-500">
+              <div className="bg-gray-50 w-16 max-sm:w-10 max-lg:w-10 rounded-full shadow-glow shadow-zinc-700 border border-zinc-500">
                 <img
                   src={currentSong?.image?.[2]?.link}
-                  alt=""
-                  className="w-14 rounded-full min-[2400px]:w-12 max-[450px]:w-12"
+                  alt={currentSong?.name}
+                  className=" rounded-full"
                 />
               </div>
-              <div className="track-details space-y-1 md:w-full">
+              <div className="track-details space-y-1 lg:w-full">
                 <h1 className="text-sm text-white/90 text-left">
                   {currentSong?.name}
                 </h1>
@@ -94,7 +94,7 @@ const MusicPlayer = () => {
               </div>
             </div>
 
-            <div className="flex space-x-4 md:space-x-10 justify-center items-center">
+            <div className="flex space-x-4 relative max-sm:left-14 justify-center items-center">
               {/* <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60 hidden md:block">
                 <PiRepeat onClick={repeatSong} />
               </div> */}
@@ -109,7 +109,7 @@ const MusicPlayer = () => {
                 </div>
               </button>
               <button onClick={() => nextSong()}>
-                <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60">
+                <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60 ">
                   <RxTrackNext />
                 </div>
               </button>
@@ -123,21 +123,21 @@ const MusicPlayer = () => {
                 </div>
               </button>
             </div>
-            <div className="hidden lg:flex gap-3 items-center ">
+            <div className=" lg:flex gap-3 items-center ">
               <div className="flex items-center space-x-2">
-                <span className="text-white text-sm">
+                <span className="text-white text-sm max-sm:hidden">
                   {formatTime(currentTime)}
                 </span>
                 <input
                   type="range"
-                  className="w-72 h-1 bg-red-800 rounded-lg appearance-none cursor-pointer accent-red-800 progress"
+                  className="lg:w-72 max-sm:hidden h-1 bg-red-800 rounded-lg appearance-none cursor-pointer accent-red-800 progress"
                   min={0}
                   max={100}
                   step="0.1"
                   value={((currentTime / duration) * 100).toString()}
                   onChange={handleSeek}
                 />
-                <span className="text-white text-sm">
+                <span className="text-white text-sm max-sm:hidden">
                   {formatTime(duration)}
                 </span>
               </div>

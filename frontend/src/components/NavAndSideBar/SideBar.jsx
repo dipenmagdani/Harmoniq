@@ -42,8 +42,10 @@ const SideBar = () => {
       {/* Sidebar */}
       <div
         className={`${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full no-scrollbar'
-        } lg:translate-x-0 transition-transform transform fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 overflow-y-auto lg:w-56 lg:left-3 lg:top-3 lg:border-2 lg:h-[610px] lg:rounded-2xl lg:border-zinc-700/80 lg:bg-[#121217] not-scrollbar`}
+          isSidebarOpen
+            ? 'translate-x-0 no-scrollbar'
+            : '-translate-x-full no-scrollbar '
+        } lg:translate-x-0 transition-transform transform fixed inset-y-0 left-0 z-40 w-64 bg-gray-900 overflow-y-auto lg:w-56 lg:left-3 lg:top-3 lg:border-2 max-lg:h-[610px] xl:h-full max-sm:h-full lg:rounded-2xl lg:border-zinc-700/80 lg:bg-zinc-900 no-scrollbar`}
       >
         <Link to={'/'}>
           <div className="logo cursor-pointer flex justify-center h-fit p-4 lg:p-0">
@@ -112,7 +114,7 @@ const SideBar = () => {
       {/* Overlay for Small Screens */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          className="fixed inset-0 bg-black  z-30 lg:hidden"
           onClick={toggleSidebar}
         ></div>
       )}
