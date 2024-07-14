@@ -35,6 +35,7 @@ const useApi = (endpoint, id, setData) => {
     setTimeout(() => {
       fetchData();
     }, 500);
+    window.scroll(0, 0);
   }, [endpoint, id, setData]);
 
   return { isLoading, setIsLoading };

@@ -85,11 +85,11 @@ const MusicPlayer = () => {
                   {currentSong?.name}
                 </h1>
                 <div className="artist-name overflow-x-auto no-scrollbar w-40">
-                  <p className="text-xs text-nowrap text-zinc-500/80">
+                  <marquee className="text-xs text-nowrap text-zinc-500/80">
                     {currentSong?.artist_map?.artists
                       .map((a_item) => a_item.name)
                       .join()}
-                  </p>
+                  </marquee>
                 </div>
               </div>
             </div>
