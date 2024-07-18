@@ -8,6 +8,15 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       port: 5173,
+      ...(mode === 'development' && {
+        proxy: {
+          '/api': {
+            target: env.VITE_API_URL,
+            changeOrigin: true,
+            secure: false,
+          },
+        },
+      }),
     },
   };
 });

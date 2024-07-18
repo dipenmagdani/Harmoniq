@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const useApi = (endpoint, id, setData) => {
   const [isLoading, setIsLoading] = useState(true);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,7 +16,7 @@ const useApi = (endpoint, id, setData) => {
 
         if (id) {
           const cleanId = id.replace(/=$/, '');
-          url = `${endpoint}/${cleanId}`;
+          url = `${apiUrl}${endpoint}/${cleanId}`;
         }
 
         const response = await fetch(url);
