@@ -94,7 +94,7 @@ const MusicPlayer = () => {
               </div>
             </div>
 
-            <div className="flex space-x-4 relative max-sm:left-14 justify-center items-center">
+            <div className="flex space-x-4 relative max-sm:left-3 justify-center items-center ">
               {/* <div className="text-2xl cursor-pointer text-white/20 hover:text-white/60 hidden md:block">
                 <PiRepeat onClick={repeatSong} />
               </div> */}
@@ -115,7 +115,7 @@ const MusicPlayer = () => {
               </button>
               <button onClick={() => shuffleSongs()}>
                 <div
-                  className={`text-2xl cursor-pointer  hover:text-white/60 ${
+                  className={`text-2xl cursor-pointer max-sm:hidden hover:text-white/60 ${
                     isShuffled ? 'text-red-700 ' : 'text-white/20'
                   }`}
                 >
@@ -123,7 +123,7 @@ const MusicPlayer = () => {
                 </div>
               </button>
             </div>
-            <div className=" lg:flex gap-3 items-center ">
+            <div className=" lg:flex gap-3 items-center max-sm:hidden">
               <div className="flex items-center space-x-2">
                 <span className="text-white text-sm max-sm:hidden">
                   {formatTime(currentTime)}

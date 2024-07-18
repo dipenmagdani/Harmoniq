@@ -17,8 +17,8 @@ const NavBar = () => {
   };
 
   return (
-    <nav className=" py-8 sm:ml-60 flex justify-center max-sm:pt-14">
-      <div className="flex  justify-center max-lg:mr-10 max-md:mr-52 max-sm:ml-52">
+    <nav className=" py-8  flex justify-center">
+      <div className="relative flex justify-center max-lg:mr-10 max-md:mr-52 max-sm:ml-52 max-sm:bottom-5">
         <form className="" onSubmit={handleSearchSubmit}>
           <div className="relative flex items-center">
             <div className="absolute left-3 text-zinc-500/80">
