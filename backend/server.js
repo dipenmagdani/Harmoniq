@@ -3,7 +3,7 @@ const cors = require("cors");
 const { default: axios } = require("axios");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5174;
 const { API_URL } = process.env;
 const app = express();
 
