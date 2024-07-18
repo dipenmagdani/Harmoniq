@@ -85,7 +85,7 @@ const SideBar = () => {
               </div>
             </div>
           </div>
-          <div className="section-list space-y-1 bg-black w-44 border-2 ">
+          <div className="section-list space-y-1 w-44 ">
             <div className=" font-md text-lg relative rounded-xl h-44 overflow-y-auto no-scrollbar left-4">
               <button onClick={() => toast.warning('Coming Soon!')}>
                 <div className="flex gap-1 relative top-3 rounded-lg h-12 border-[2px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-36 overflow-x-auto no-scrollbar text-nowrap">
@@ -99,7 +99,7 @@ const SideBar = () => {
               </button>
             </div>
           </div>
-          <div className="section-list space-y-1">
+          {/* <div className="section-list space-y-1">
             <div className="gap-3 font-md text-lg relative left-3 space-y-3 rounded-xl h-44 overflow-y-auto no-scrollbar">
               <button onClick={() => toast.warning('Coming Soon!')}>
                 <div className="flex gap-1 relative top-3 rounded-lg h-12 border-[2px] text-red-600/80 bg-slate-800/30 border-red-600/60 hover:bg-red-600/60 hover:text-white cursor-pointer w-36 overflow-x-auto no-scrollbar text-nowrap">
@@ -112,9 +112,9 @@ const SideBar = () => {
                 </div>
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="flex gap-2 text-sm text-zinc-500 items-center justify-center pt-5">
+        <div className="flex gap-2 text-sm text-zinc-500 items-center justify-center">
           Made By
           <a href="https://www.github.com/dipenmagdani">
             <BiLogoGithub size={25} className="hover:text-zinc-300" />
