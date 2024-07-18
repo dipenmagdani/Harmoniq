@@ -35,7 +35,7 @@ const CardComponent = ({ data }) => {
                 ></div>
               )}
               <div className="header-content flex flex-col">
-                <h1 className="text-4xl flex items-start max-sm:text-xl">
+                <h1 className="text-4xl flex items-start max-sm:text-xl max-sm:text-center">
                   {data?.name}
                 </h1>
                 <h2 className="mt-2 ml-0">By {data?.subtitle}</h2>
@@ -67,7 +67,7 @@ const CardComponent = ({ data }) => {
             </div>
           </div>
           <div
-            className="songs-list bg-black/20 rounded-xl p-5 border-2  border-zinc-800/80 max-sm:w-[380px] flex"
+            className="songs-list bg-black/20 rounded-xl p-5 border-2 z-30 border-zinc-800/80 max-sm:w-[380px] flex"
             style={{ marginBottom: '100px' }}
           >
             <div className="overflow-y-auto transition-all duration-500 ease-in-out w-[850px] p-3 flex text-center justify-center">

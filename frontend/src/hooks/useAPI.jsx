@@ -12,11 +12,14 @@ const useApi = (endpoint, id, setData) => {
       }
 
       try {
-        let url = endpoint;
+        let url = `${endpoint}`;
 
         if (id) {
           const cleanId = id.replace(/=$/, '');
-          url = `${apiUrl}${endpoint}/${cleanId}`;
+          // Check if the endpoint already ends with a slash
+          url = endpoint.endsWith('/')
+            ? `${url}${cleanId}`
+            : `${url}/${cleanId}`;
         }
 
         const response = await fetch(url);
@@ -30,6 +33,7 @@ const useApi = (endpoint, id, setData) => {
         setIsLoading(false);
       } catch (error) {
         console.error('Fetch data error:', error.message);
+        setIsLoading(false);
       }
     };
 
@@ -37,7 +41,7 @@ const useApi = (endpoint, id, setData) => {
       fetchData();
     }, 500);
     window.scroll(0, 0);
-  }, [endpoint, id, setData]);
+  }, [endpoint, id, setData, apiUrl]);
 
   return { isLoading, setIsLoading };
 };

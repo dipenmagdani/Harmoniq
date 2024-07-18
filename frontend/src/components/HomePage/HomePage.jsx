@@ -31,7 +31,6 @@ const HomePage = () => {
     setGenre(newGenre);
     setSelectedGenre(newGenre);
     setIsGenreLoading(true);
-    // Simulate API call delay
     setTimeout(() => {
       setIsGenreLoading(false);
     }, 1200);
