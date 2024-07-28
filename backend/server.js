@@ -3,13 +3,14 @@ const cors = require("cors");
 const { default: axios } = require("axios");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 5174;
+const PORT = process.env.PORT || 3000;
 const { API_URL } = process.env;
 const app = express();
 
 app.use(express.json());
-const corsOptions = {
-  origin: process.env.FRONTEND_URL || "*",
+
+let corsOptions = {
+  origin: ["https://harmoniq.netlify.app"],
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };

@@ -12,7 +12,7 @@ const useApi = (endpoint, id, setData) => {
       }
 
       try {
-        let url = `${apiUrl}${endpoint}`;
+        let url = `${endpoint}`;
 
         if (id) {
           const cleanId = id.replace(/=$/, '');
