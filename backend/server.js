@@ -8,9 +8,8 @@ const { API_URL } = process.env;
 const app = express();
 
 app.use(express.json());
-
-let corsOptions = {
-  origin: ["https://harmoniq.netlify.app"],
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "*",
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
