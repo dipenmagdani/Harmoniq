@@ -1,5 +1,4 @@
 import React, { createContext, useState, useRef, useEffect } from 'react';
-import { Toaster } from 'sonner';
 
 export const SongContext = createContext(null);
 
@@ -22,6 +21,7 @@ export const SongProvider = (props) => {
   const [volume, setVolume] = useState(1);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [localMusic, setLocalMusic] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const audioRef = useRef(new Audio());
 
@@ -31,7 +31,6 @@ export const SongProvider = (props) => {
     document.title = 'Harmoniq - Discover The Beat';
   }
 
-  <Toaster richColors position="top-left" />;
   // console.log(localMusic);
   useEffect(() => {
     const audio = audioRef.current;
@@ -219,6 +218,8 @@ export const SongProvider = (props) => {
         handleVolumeChange,
         isFullScreen,
         setIsFullScreen,
+        isLoggedIn,
+        setIsLoggedIn,
       }}
     >
       {props.children}

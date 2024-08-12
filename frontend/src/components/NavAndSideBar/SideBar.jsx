@@ -1,11 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { TbPlaylist } from 'react-icons/tb';
 import { Link, useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'sonner';
-import { HiTrendingUp } from 'react-icons/hi';
-import { FaStream } from 'react-icons/fa';
-import { BiAlbum, BiLogoGithub } from 'react-icons/bi';
-import { MdPlaylistAddCircle } from 'react-icons/md';
+import { FaUser } from 'react-icons/fa';
+import { BiLogInCircle, BiLogoGithub } from 'react-icons/bi';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import SongContext from '../../contexts/SongContext';
 import { PiPlaylistDuotone } from 'react-icons/pi';
@@ -28,9 +25,29 @@ const SideBar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/user/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.status === 200) {
+        toast.success('Logged out successfully');
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 1000);
+      } else {
+        toast.error('Failed to log out');
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
-      <Toaster richColors position="top-center" />
+      <Toaster richColors position="bottom-right" />
+
       {/* Hamburger Menu for Small Screens */}
       <button
         className="lg:hidden fixed top-4 left-4 z-50 text-white text-3xl "
@@ -53,34 +70,49 @@ const SideBar = () => {
         <div className="main-section flex flex-col gap-3 p-4 lg:p-0">
           <div className="flex justify-center items-center "></div>
           <div className="section-list">
-            <div className="title flex text-white/50">
-              <h1>Recommended</h1>
+            <div className="title flex text-white/50 ">
+              <h1 className="relative right-8">Your Profile</h1>
             </div>
             <div className="gap-3 font-md text-lg py-3 space-y-4 text-zinc-300">
-              <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
-                <div className="text-2xl">
-                  <HiTrendingUp />
-                </div>
-                <h1>Top Trending</h1>
-              </div>
-              <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
-                <div className="text-2xl">
-                  <TbPlaylist />
-                </div>
-                <h1>For you</h1>
-              </div>
-              <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
-                <div className="text-xl">
-                  <FaStream />
-                </div>
-                <h1 className="relative left-1">Discover</h1>
-              </div>
-              <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
-                <div className="text-xl">
-                  <BiAlbum />
-                </div>
-                <h1 className="relative left-1">Top Albums</h1>
-              </div>
+              {document.cookie ? (
+                <>
+                  <Link to={'/profile'}>
+                    <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
+                      <div className="text-xl">
+                        <BiLogInCircle />
+                      </div>
+                      <h1>Profile</h1>
+                    </div>
+                  </Link>
+                  <Link to={'#'} onClick={handleLogout}>
+                    <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
+                      <div className="text-xl">
+                        <FaUser />
+                      </div>
+                      <h1>Logout</h1>
+                    </div>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to={'/login'}>
+                    <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
+                      <div className="text-xl">
+                        <BiLogInCircle />
+                      </div>
+                      <h1>Login</h1>
+                    </div>
+                  </Link>
+                  <Link to={'/signup'}>
+                    <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
+                      <div className="text-xl">
+                        <FaUser />
+                      </div>
+                      <h1>Signup</h1>
+                    </div>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
           <div className="section-list space-y-1 w-44 ">

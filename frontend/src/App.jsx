@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 const LazyHomePage = React.lazy(() => import('./components/HomePage/HomePage'));
 import { SongProvider } from './contexts/SongContext';
 import { TopTrending } from './components/NavbarSections/TopTrending';
+import Signup from './components/LoginAndSignup/Signup';
 const LazyAlbumDetails = React.lazy(() =>
   import('./components/Genre/AlbumDetails')
 );
@@ -21,6 +22,7 @@ const LazySearchByType = React.lazy(() =>
 import SkeletonCard from './components/CardComponent/SkeletonCard';
 const LazyLayout = React.lazy(() => import('./components/Layout/Layout'));
 import MusicPlayer from './components/MusicPlayer/MusicPlayer';
+import Login from './components/LoginAndSignup/Login';
 export const App = () => {
   return (
     <SongProvider>
@@ -80,6 +82,8 @@ export const App = () => {
               }
             />
             <Route path="top-trending" element={<TopTrending />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </LazyLayout>
       </BrowserRouter>
