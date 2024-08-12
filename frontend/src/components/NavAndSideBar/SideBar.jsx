@@ -33,10 +33,7 @@ const SideBar = () => {
       });
 
       if (response.status === 200) {
-        toast.success('Logged out successfully');
-        setTimeout(() => {
-          window.location.reload(true);
-        }, 1000);
+        window.location.reload(true);
       } else {
         toast.error('Failed to log out');
       }
@@ -74,7 +71,7 @@ const SideBar = () => {
               <h1 className="relative right-8">Your Profile</h1>
             </div>
             <div className="gap-3 font-md text-lg py-3 space-y-4 text-zinc-300">
-              {document.cookie ? (
+              {document.cookie.includes('uid') ? (
                 <>
                   <Link to={'/profile'}>
                     <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
