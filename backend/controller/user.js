@@ -25,7 +25,11 @@ const handleUserLogin = async (req, res) => {
     }
 
     const token = setUser(user);
-    res.cookie("uid", token);
+    res.cookie("uid", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
     return res
       .status(200)
       .send({ message: "Login Successful", name: user.name });
