@@ -30,6 +30,7 @@ const Login = () => {
             email: formData.email,
             password: formData.password,
           }),
+          credentials: 'include',
         }
       );
 
