@@ -41,6 +41,7 @@ const SideBar = () => {
       console.log(e);
     }
   };
+
   return (
     <>
       <Toaster richColors position="bottom-right" />
