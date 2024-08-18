@@ -10,8 +10,9 @@ import { PiPlaylistDuotone } from 'react-icons/pi';
 const SideBar = () => {
   const { setSearchQuery } = useContext(SongContext);
   const navigate = useNavigate();
-  const [localSearchQuery, setLocalSearchQuery] = useState('');
+  const [localSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { jwt } = useContext(SongContext);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -29,11 +30,9 @@ const SideBar = () => {
     localStorage.removeItem('token');
     toast.success('Logged out successfully!');
     setTimeout(() => {
-      window.location.href = '/login';
+      window.location.href = `${import.meta.env.VITE_API_URL}/login`;
     }, 1000);
   };
-
-  const token = localStorage.getItem('token');
 
   return (
     <>
@@ -65,7 +64,7 @@ const SideBar = () => {
               <h1 className="relative right-8">Your Profile</h1>
             </div>
             <div className="gap-3 font-md text-lg py-3 space-y-4 text-zinc-300">
-              {token ? (
+              {jwt ? (
                 <>
                   <Link to={'#'} onClick={() => toast.warning('Coming Soon!')}>
                     <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
@@ -86,7 +85,7 @@ const SideBar = () => {
                 </>
               ) : (
                 <>
-                  <Link to={'/login'}>
+                  <Link to={`${import.meta.env.VITE_API_URL}/login`}>
                     <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
                       <div className="text-xl">
                         <BiLogInCircle />
@@ -94,7 +93,7 @@ const SideBar = () => {
                       <h1>Login</h1>
                     </div>
                   </Link>
-                  <Link to={'/signup'}>
+                  <Link to={`${import.meta.env.VITE_API_URL}/signup`}>
                     <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
                       <div className="text-xl">
                         <FaUser />

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'sonner';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import SongContext from '../../contexts/SongContext';
 
 const Login = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const { jwt, setJwt } = useContext(SongContext);
   const {
     register,
     handleSubmit,
@@ -60,7 +62,8 @@ const Login = () => {
   useEffect(() => {
     // Check if the user is already logged in and redirect
     const token = localStorage.getItem('token');
-    if (token) {
+    setJwt(token);
+    if (jwt) {
       navigate('/');
     }
   }, [navigate]);

@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'sonner';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { useNavigate } from 'react-router-dom';
+import SongContext from '../../contexts/SongContext';
 
 const Signup = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -12,6 +13,7 @@ const Signup = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+  const { jwt } = useContext(SongContext);
 
   const onSubmit = async (formData) => {
     setIsLoading(true);
@@ -36,7 +38,7 @@ const Signup = () => {
       if (response.status === 201) {
         toast.success(data.message);
         setTimeout(() => {
-          navigate('/login');
+          navigate(`${import.meta.env.VITE_API_URL}/login`);
         }, 2000);
       } else {
         toast.error(data.message);
@@ -49,7 +51,7 @@ const Signup = () => {
   };
   useEffect(() => {
     // Check if the user is already logged in and redirect
-    if (document.cookie.includes('uid')) {
+    if (jwt) {
       navigate('/');
     }
   }, [navigate]);

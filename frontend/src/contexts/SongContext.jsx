@@ -22,6 +22,7 @@ export const SongProvider = (props) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [localMusic, setLocalMusic] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [jwt, setJwt] = useState(null);
 
   const audioRef = useRef(new Audio());
 
@@ -220,6 +221,8 @@ export const SongProvider = (props) => {
         setIsFullScreen,
         isLoggedIn,
         setIsLoggedIn,
+        jwt,
+        setJwt,
       }}
     >
       {props.children}
