@@ -30,7 +30,7 @@ const SideBar = () => {
     localStorage.removeItem('token');
     toast.success('Logged out successfully!');
     setTimeout(() => {
-      window.location.href = `${import.meta.env.VITE_API_URL}/login`;
+      window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/login`;
     }, 1000);
   };
 
@@ -85,7 +85,7 @@ const SideBar = () => {
                 </>
               ) : (
                 <>
-                  <Link to={`/login`}>
+                  <Link to={`${import.meta.env.VITE_FRONTEND_URL}/login`}>
                     <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
                       <div className="text-xl">
                         <BiLogInCircle />
@@ -93,7 +93,7 @@ const SideBar = () => {
                       <h1>Login</h1>
                     </div>
                   </Link>
-                  <Link to={`/signup`}>
+                  <Link to={`${import.meta.env.VITE_FRONTEND_URL}/signup`}>
                     <div className="flex gap-3 rounded-lg h-8 relative cursor-pointer hover:text-red-700/85">
                       <div className="text-xl">
                         <FaUser />

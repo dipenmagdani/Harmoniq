@@ -47,7 +47,6 @@ const Signup = () => {
     }
   };
   useEffect(() => {
-    // Check if the user is already logged in and redirect
     if (jwt) {
       navigate('/');
     }

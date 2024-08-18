@@ -21,22 +21,29 @@ const Login = () => {
     setIsLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const response = await fetch(`/user/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/user/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       const result = await response.json();
       if (result.token) {
-        localStorage.setItem('token', result.token);
+        localStorage.setItem('token', JSON.stringify(result.token));
+        setJwt(result.token);
+      } else {
+        toast.error(result.message);
       }
+
       const msg = document.getElementById('er_rmsg');
       msg.textContent = '';
       if (response.status === 200) {
@@ -57,9 +64,6 @@ const Login = () => {
     }
   };
   useEffect(() => {
-    // Check if the user is already logged in and redirect
-    const token = localStorage.getItem('token');
-    setJwt(token);
     if (jwt) {
       navigate('/');
     }
