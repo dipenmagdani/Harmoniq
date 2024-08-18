@@ -26,7 +26,7 @@ const HomePage = () => {
     { name: 'Haryanvi', value: 'haryanvi' },
   ];
 
-  const { isLoading } = useApi('/api/home', genre, setSongDetails);
+  const {} = useApi('/api/home', genre, setSongDetails);
   const handleGenreChange = (newGenre) => {
     setGenre(newGenre);
     setSelectedGenre(newGenre);
