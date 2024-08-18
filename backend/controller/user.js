@@ -28,6 +28,7 @@ const handleUserLogin = async (req, res) => {
     res.cookie("uid", token, {
       sameSite: "None",
       secure: true,
+      domain: process.env.FRONTEND_URL,
     });
     return res
       .status(200)
