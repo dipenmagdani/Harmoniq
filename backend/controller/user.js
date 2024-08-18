@@ -25,12 +25,10 @@ const handleUserLogin = async (req, res) => {
     }
 
     const token = setUser(user);
-    res.cookie("uid", token, {
-      // partitioned: true,
-    });
+
     return res
       .status(200)
-      .send({ message: "Login Successful", name: user.name });
+      .send({ message: "Login Successful", name: user.name, token: token });
   } catch (e) {
     return res.status(500).send({ error: "Internal Server Error" });
   }
@@ -76,13 +74,12 @@ const handleUserSignup = async (req, res) => {
   }
 };
 
-const handleUserLogout = (req, res) => {
-  res.clearCookie("uid");
-  return res.status(200).send({ message: "Logout Successful" });
-};
+// const handleUserLogout = (req, res) => {
+//   return res.status(200).send({ message: "Logout Successful" });
+// };
 
 module.exports = {
   handleUserLogin,
   handleUserSignup,
-  handleUserLogout,
+  // handleUserLogout,
 };
