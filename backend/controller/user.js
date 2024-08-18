@@ -27,7 +27,7 @@ const handleUserLogin = async (req, res) => {
     const token = setUser(user);
     res.cookie("uid", token, {
       sameSite: "None",
-      secure: false,
+      secure: true,
     });
     return res
       .status(200)
