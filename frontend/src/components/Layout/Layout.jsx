@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
   return (
     <div>
       <NavBar />
-      {!isFullScreen ? <SideBar /> : null}
+      <SideBar />
       <div className="main-content">{children}</div>
       <MusicPlayer />
     </div>

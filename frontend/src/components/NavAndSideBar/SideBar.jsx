@@ -25,22 +25,15 @@ const SideBar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleLogout = async () => {
-    try {
-      const response = await fetch('/user/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
-
-      if (response.status === 200) {
-        window.location.reload(true);
-      } else {
-        toast.error('Failed to log out');
-      }
-    } catch (e) {
-      console.log(e);
-    }
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    toast.success('Logged out successfully!');
+    setTimeout(() => {
+      window.location.href = '/login';
+    }, 1000);
   };
+
+  const token = localStorage.getItem('token');
 
   return (
     <>
@@ -72,9 +65,9 @@ const SideBar = () => {
               <h1 className="relative right-8">Your Profile</h1>
             </div>
             <div className="gap-3 font-md text-lg py-3 space-y-4 text-zinc-300">
-              {document.cookie.includes('uid') ? (
+              {token ? (
                 <>
-                  <Link to={'/profile'}>
+                  <Link to={'#'} onClick={() => toast.warning('Coming Soon!')}>
                     <div className="flex gap-3 rounded-lg h-8 hover:text-red-700/85 cursor-pointer">
                       <div className="text-xl">
                         <BiLogInCircle />

@@ -35,6 +35,9 @@ const Login = () => {
       );
 
       const result = await response.json();
+      if (result.token) {
+        localStorage.setItem('token', result.token);
+      }
       const msg = document.getElementById('er_rmsg');
       msg.textContent = '';
       if (response.status === 200) {
@@ -56,7 +59,8 @@ const Login = () => {
   };
   useEffect(() => {
     // Check if the user is already logged in and redirect
-    if (document.cookie.includes('uid')) {
+    const token = localStorage.getItem('token');
+    if (token) {
       navigate('/');
     }
   }, [navigate]);
