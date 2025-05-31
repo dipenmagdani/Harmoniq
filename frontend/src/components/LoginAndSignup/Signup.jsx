@@ -8,34 +8,33 @@ import SongContext from '../../contexts/SongContext';
 const Signup = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const { jwt } = useContext(SongContext);
 
   const onSubmit = async (formData) => {
     setIsLoading(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const response = await fetch(`/user/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-        credentials: 'include',
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/user/signup`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+          }),
+          credentials: 'include',
+        }
+      );
       const data = await response.json();
       if (response.status === 201) {
         toast.success(data.message);
         setTimeout(() => {
-          navigate(`${import.meta.env.VITE_API_URL}/login`);
+          navigate('/login');
         }, 2000);
       } else {
         toast.error(data.message);
