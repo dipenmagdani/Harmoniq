@@ -16,7 +16,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.get("/", (res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     status: 200,
     health: "OK",
