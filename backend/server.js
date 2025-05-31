@@ -16,6 +16,12 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: 200,
+    health: "OK"
+  });
+});
 app.use("/api", apiRouter);
 app.use("/user", userRouter);
 
