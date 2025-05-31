@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 const connectDB = require("./connection");
 const apiRouter = require("./routes/apiRoute");
 const userRouter = require("./routes/user");
+
 connectDB();
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -16,10 +16,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.get("/", (req, res) => {
+app.get("/", (res) => {
   res.status(200).json({
     status: 200,
-    health: "OK"
+    health: "OK",
   });
 });
 app.use("/api", apiRouter);

@@ -78,8 +78,10 @@ const handleUserSignup = async (req, res) => {
 //   return res.status(200).send({ message: "Logout Successful" });
 // };
 
+const handleNewPlaylist = (req, res) => {};
 module.exports = {
   handleUserLogin,
   handleUserSignup,
   // handleUserLogout,
+  handleNewPlaylist,
 };
